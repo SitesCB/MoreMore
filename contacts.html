@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Контакты</title>
+        <link href="main.css" rel="stylesheet" type="text/css">
+        <link href="mobile.css" rel="stylesheet" type="text/css">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+        <link rel="icon" href="иконки/Море&More.png" type="image/x-icon">
+    </head>
+    <body>
+        <header id="header">
+            <div class="hat-block">
+                <div class="site-container">
+                    <div class="left-block">
+                        <a href="index.html">Главная</a>
+                        <a href="delivery.html">Доставка и оплата</a>
+                        <a href="about.html">О нас</a>
+                        <a href="contacts.html">Контакты</a>
+                    </div>
+                    <div class="right-block">
+                        <p>г.Нижний Новгород, ул. Торфяная 32</p>
+                    </div>
+                </div>
+            </div>
+            <div class="neck-block">
+                <div class="site-container">
+                    <a href="index.html"><img src="иконки/море верх.png" id="more-up-img"></a>
+                    <div class="mark-block">
+                        <div>
+                            <p>Принимаем заказы</p>
+                            <h1>С 8:00 до 22:00</h1>
+                        </div>
+                        
+                    </div>
+                    <div class="mark-block">
+                        <div>
+                            <p>Оформить заказ</p>
+                            <h1>+7(986)-766-99-31</h1>
+                        </div>
+                    </div>
+                    <div class="mark-block">
+                        <div>
+                            <p>Бесплатная доставка</p>
+                            <h1>От 2000₽</h1>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+            
+            <div class="black-surface" id="black-surface" onclick="show_menu()">
+
+            </div>
+            
+
+            <div class="popup-added" id="toast">
+                <div class="header">
+                    <p>Товар добавлен в корзину</p>
+                    <div class="close-button-block" id="liveToastBtn">
+                        <button class="close-button" onclick="hideToast()"><img src="иконки/close.png"></button>
+                    </div>
+                </div>
+                <div class="body">
+                    <div>
+                        <p>Название товара</p>
+                        <p id="counter-popup">Количество:</p>
+                        <p id="summary-popup">Сумма:</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu" id="products-menu">
+                <div class="header-products-menu">
+                    <h1>Меню</h1>
+                    <button onclick="show_menu()"><img src="иконки/close.png"></button>
+                </div>
+                <div class="body-menu">
+                    <ul>
+                        <a href="category.html"><li>Икра</li></a>
+                        <a href="#"><li>Краб</li></a>
+                        <a href="#"><li>Креветки</li></a>
+                        <a href="#"><li>Морепродукты</li></a>
+                        <a href="#"><li>Консервы</li></a>
+                        <a href="#"><li>Рыба</li></a>
+                        <a href="#"><li>Филе и стейки</li></a>
+                        <a href="#"><li>Полуфабрикаты</li></a>
+                        <a href="#"><li>Витамины и бады</li></a>
+                        <a href="#"><li>Заправка для рыбы</li></a>
+                        <a href="#"><li>Сыры</li></a>
+                        <a href="#"><li>Под пивас</li></a>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="menu-block" id="menu">
+                <div class="site-container">
+                    <div class="block-left-menu">
+                        <div class="button-text-menu">
+                            <button onclick="show_menu()"><img src="иконки/burger.png"></button>
+                            <p>Меню</p>
+                        </div>
+                        <form class="search-form" action="search.html" method="get">
+                            <input placeholder="Поиск..." value="" name="search">
+                            <button><img src="иконки/Sprite-0001.png"></button>
+                        </form>
+                    </div>
+                    <div class="block-right-menu">
+                        <div class="cart">
+                            <div class="cart-counter" id="cart-counter-block">
+                                <p id="cart-counter">0</p>
+                            </div>
+                            <a href="cart.html">
+                                <img src="иконки/Sprite-0002.png" width="30px" height="30px">
+                                <p>Корзина</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <section class="items-4-block" id="home-section">
+                <div class="site-container to-center">
+                    <div class="content contacts">
+                        <div class="title-section" id="why-us-block">
+                            <div class="stick"></div>
+                            <h1>Связаться с нами</h1>
+                            <div class="stick"></div>
+                        </div>
+                        <p>Если у вас есть какие-либо предложения или остались вопросы, оставьте нам сообщение</p>
+                        <div class="site-container to-center about-us-block">
+                            <div class="left-contacts">
+                                <form method="post">
+                                    <div class="block-input-contacts">
+                                        <label>Ваше имя</label>
+                                        <input required name="name">
+                                    </div>
+                                    <div class="block-input-contacts">
+                                        <label>Номер телефона</label>
+                                        <input required name="phone">
+                                    </div>
+                                    <div class="block-input-contacts">
+                                        <label>Сообщение</label>
+                                        <input required name="message">
+                                    </div>
+                                    <button>Отправить</button>
+                                    <div class="political-block-form">
+                                        <input type="checkbox" required>
+                                        <p>Я прочитал и согласен с <a href="privacy.html">политикой обработки данных</a></p>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                            <div class="right-contacts">
+                                <h2>Контактная информация</h2>
+                                <div class="icon-text-block">
+                                    <img src="иконки/Sprite-0022.png">
+                                    <div class="icon-header-text-block">
+                                        <h4>Адрес</h4>
+                                        <p>г. Нижний Новгород, ул. Торфяная 32</p>
+                                    </div>
+                                </div>
+                                <div class="icon-text-block">
+                                    <img src="иконки/Sprite-0019.png">
+                                    <div class="icon-header-text-block">
+                                        <h4>Наш телефон</h4>
+                                        <p>+7(986)-766-99-31</p>
+                                    </div>
+                                </div>
+                                <div class="icon-text-block">
+                                    <img src="иконки/Sprite-0020.png">
+                                    <div class="icon-header-text-block">
+                                        <h4>Наша почта</h4>
+                                        <p>more-more-nn@yandex.ru</p>
+                                    </div>
+                                </div>
+                                <h2>Наши соцсети</h4>
+                                <div class="socials-block-contacts">
+                                    <a><img src="иконки/Sprite-0024.png"></a>
+                                    <a><img src="иконки/Sprite-0026.png"></a>
+                                    <a><img src="иконки/Sprite-0023.png"></a>
+                                    <a><img src="иконки/Sprite-0025.png"></a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <div class="wave" id="top-wave">
+            <img src="mockups/wave.png">
+        </div>
+        <footer>
+           
+            
+            <div class="site-container to-center">
+                
+                <div class="content">
+                    <div class="img-bottom-block">
+                        <img src="иконки/море низ.png" id="lower-logo">
+                    </div>
+                    <div class="socials">
+                        <a><img src="иконки/Sprite-0003.png"></a>
+                        <a><img src="иконки/Sprite-0004.png"></a>
+                        <a><img src="иконки/Sprite-0005.png"></a>
+                        <a><img src="иконки/Sprite-0006.png"></a>
+                    </div>
+                    <div class="socials">
+                        <a href="index.html">Главная</a>
+                        <a href="delivery.html">Доставка и оплата</a>
+                        <a href="about.html">О нас</a>
+                        <a href="contacts.html" class="open-page">Контакты</a>
+                    </div>
+                    <div class="wave" id="bottom-wave">
+                        <p>© Море&More. Все права защищены</p>
+                        <img src="mockups/wave2.png">
+                        <img src="mockups/якорь.png">
+                    </div>
+                </div>
+            </div>
+            
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>
