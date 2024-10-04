@@ -89,3 +89,18 @@ function loadCartContainer() {
 
 document.addEventListener('DOMContentLoaded', loadCartContainer)
 
+function getCardFromCart(item_id) {
+    let item = document.getElementById("item" + item_id);
+    let name = item.querySelector('h2').textContent;
+    let weight = item.querySelector('p').textContent;
+    let count = item.querySelector('.counter input').value;
+    let ordinary_price = parseInt(item.querySelector('.price-item-cart').textContent) / count;
+    return {
+        "name" : name,
+        "weight" : weight,
+        "count": count,
+        "price" : ordinary_price,
+        "id" : item_id
+    }
+}
+

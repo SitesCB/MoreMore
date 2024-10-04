@@ -277,24 +277,24 @@
                                     <button onclick="AddToCartFromPage(1)">В корзину</button>
                                 </div>
                             </div>
-                            <div class="item-4">
-                                <div class="img-item-4">
-        
-                                </div>
+                            <div class="item-4" id="iitem2">
+                                <a class="img-item-4" href="item.html">
+                                    <p>Рабочая карточка</p>
+                                </a>
                                 <div class="item-4-neck">
                                     <div class="info">
-                                        <p>Название</p>
+                                        <p>Название2</p>
                                         
                                     </div>
                                     <div class="counter">
-                                        <button>-</button>
-                                        <input value="1" type="number"></input>
-                                        <button>+</button>
+                                        <button onclick="decrement('item2')">-</button>
+                                        <input value="1" type="number" id="item2"></input>
+                                        <button onclick="increment('item2')">+</button>
                                     </div>
                                 </div>
                                 <div class="item-4-shoes">
-                                    <p>От 500 ₽</p>
-                                    <button>В корзину</button>
+                                    <p id="price-detail">От <span class="price-item-numeric">500</span> ₽</p>
+                                    <button onclick="AddToCartFromPage(2)">В корзину</button>
                                 </div>
                             </div>
                             <div class="item-4">

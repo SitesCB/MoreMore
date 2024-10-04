@@ -132,6 +132,18 @@ function AddToCartFromPage(card_id) {
 }
 
 function DeleteFromCart(item) {
+    let card_id = getCardId(item);
+    let current_item = getCardFromCart(card_id);
+    let items = JSON.parse(localStorage.getItem('items'));
+    let index = 0;
+    items.forEach(item => {
+        if (item.id == current_item.id) {
+            delete items[index];
+        }
+        index++;
+    });
+
+    localStorage.setItem('items', JSON.stringify(items));
     document.getElementById(item).remove();
     localStorage.setItem('count_cart', localStorage.getItem('count_cart') - 1);
     document.getElementById('cart-counter') -= 1;
