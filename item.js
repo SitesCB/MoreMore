@@ -1,10 +1,3 @@
-// try {
-//     const price = document.getElementById('price-detail').textContent.match(/\d+/g);
-// }
-// catch {
-
-// }
-
 function increment(item) {
     let item_id = getCardId(item)
     document.getElementById(item).value = parseInt(document.getElementById(item).value) + 1;
@@ -51,7 +44,7 @@ function loadCartContainer() {
                                             <div class="item-info-cart">
                                                 <h2>${item.name}</h2>
                                                 <p>Упаковка: 100г</p>
-                                                <button onclick="DeleteFromCart('item1')">
+                                                <button onclick="DeleteFromCart('item${item.id}')">
                                                     <img src="иконки/Sprite-0021.png">
                                                     <p>Удалить</p>
                                                 </button>
@@ -69,7 +62,7 @@ function loadCartContainer() {
         document.querySelector('.cart-container').innerHTML += `<hr>
                                         <div class="cart-price">
                                             <h1>Стоимость закака</span></h1>
-                                            <p id="current-price">3872₽</p>
+                                            <p id="current-price"></p>
                                         </div>
                                         <div class="cart-price">
                                             <h1>Доставка</span></h1>
@@ -78,7 +71,7 @@ function loadCartContainer() {
                                         <hr>
                                         <div class="cart-price">
                                             <h1>К оплате</span></h1>
-                                            <p id="result-price">3872₽</p>
+                                            <p id="result-price"></p>
                                         </div>`
         CollectSumCart();
     }
@@ -90,6 +83,7 @@ function loadCartContainer() {
 document.addEventListener('DOMContentLoaded', loadCartContainer)
 
 function getCardFromCart(item_id) {
+    console.log(item_id);
     let item = document.getElementById("item" + item_id);
     let name = item.querySelector('h2').textContent;
     let weight = item.querySelector('p').textContent;

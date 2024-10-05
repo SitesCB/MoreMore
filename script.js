@@ -103,20 +103,27 @@ function AddToCartFromPage(card_id) {
     
     document.getElementById("cart-counter-block").style.opacity = 1;
 
-    let switcher = 1;
-    if (localStorage.getItem('items')) {
-        items = JSON.parse(localStorage.getItem('items'));
-        items.forEach(item => {
-            if (item.id == result.id && item.ordinary_price == result.ordinary_price) {
-                item.count += Number(result.count);
-                item.price_result = item.count * item.ordinary_price;
-                localStorage.setItem('items', JSON.stringify(items));
-                let switcher = 0;
-            }
-            
-        });
+    let items = JSON.parse(localStorage.getItem('items'));
 
-        if (!switcher) {
+    if (items && items.length != 0) {
+        console.log(item);
+        let otheritem = 1;
+
+        for (let i = 0; i < items.length; i++) {
+            let item = items[i];
+            if (item.id == result.id && item.ordinary_price == result.ordinary_price) {
+
+                items[i].count += Number(result.count);
+                items[i].price_result = items[i].count * items[i].ordinary_price;
+                localStorage.setItem('items', JSON.stringify(items));
+                otheritem = 1;
+                break;
+
+            }
+            otheritem = 0;
+        }
+
+        if (!otheritem) {
             localStorage.setItem('items', JSON.stringify(JSON.parse(localStorage.getItem('items')).concat(result)));
             localStorage.setItem('count_cart', Number(localStorage.getItem('count_cart')) + 1);
             document.getElementById('cart-counter').textContent = localStorage.getItem('count_cart');
@@ -131,22 +138,34 @@ function AddToCartFromPage(card_id) {
 
 }
 
+// обработать случай с пустым массивом и добавлением новых элементов внутрь
+
 function DeleteFromCart(item) {
+    // item = item1
+    // получаем конкретный id товара
     let card_id = getCardId(item);
+    // получаем конкретный товар
     let current_item = getCardFromCart(card_id);
     let items = JSON.parse(localStorage.getItem('items'));
-    let index = 0;
-    items.forEach(item => {
-        if (item.id == current_item.id) {
-            delete items[index];
-        }
-        index++;
-    });
 
+    let index = 0;
+    console.log(items)
+    // если айди и цена одинаковые, то удаляем именно его
+    for (let i = 0; i < items.length; i++) {
+        card_item = items[i];
+        if (card_item.id == current_item.id) {
+            console.log(card_item, card_item.id, current_item.id, i)
+            items.splice(i, 1)
+        }
+    }
+    
     localStorage.setItem('items', JSON.stringify(items));
     document.getElementById(item).remove();
-    localStorage.setItem('count_cart', localStorage.getItem('count_cart') - 1);
-    document.getElementById('cart-counter') -= 1;
+    localStorage.setItem('count_cart', Number(localStorage.getItem('count_cart')) - 1);
+    let count_cart = document.getElementById('cart-counter').textContent -= 1;
+    if (count_cart == 0) {
+        document.getElementById("cart-counter-block").style.opacity = 0;
+    }
     CollectSumCart();
 }
 
