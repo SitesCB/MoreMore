@@ -1,21 +1,77 @@
 function increment(item) {
-    let item_id = getCardId(item)
-    document.getElementById(item).value = parseInt(document.getElementById(item).value) + 1;
-    let result_card = getInformationCard(item_id);
-    let price = result_card.ordinary_price;
-    let count = result_card.count;
+    let item_id = getCardId(item.replace("-detail", ""))
+    let card = document.getElementById(item.replace("-detail", ""));
+
+    let count_item = document.getElementById(item)
     
+    count_item.value = parseInt(document.getElementById(item).value) + 1;
+    
+    if (document.title != "Корзина") {
+        let result_card = getInformationCard(item_id);
+        let price = result_card.ordinary_price;
+        let count = result_card.count;
+    }
+    else {
+        let result_card = getCardFromCart(item_id);
+        result_card.count = Number(count_item.value);
+        result_card.result_price = result_card.count * result_card.ordinary_price;
+        card.querySelector('.price-item-cart').textContent = result_card.result_price + "₽";
+        console.log(result_card);
+        CollectSumCart();
+
+        let items = JSON.parse(localStorage.getItem('items'));
+        for (let i = 0; i < items.length; i++) {
+            if (result_card.id == items[i].id) {
+                items[i].count = result_card.count;
+                items[i].price_result = result_card.result_price;
+                break;
+            }
+        }
+        localStorage.setItem('items', JSON.stringify(items));
+    }
+
+
 }
 
 function decrement(item) {
-    let current_item = document.getElementById(item);
-    let result = getInformationCard(getCardId(item));
-    let count = parseInt(current_item.value, 10);
+    let item_id = getCardId(item.replace("-detail", ""))
+    let card = document.getElementById(item.replace("-detail", ""));
 
-    if (count > 1) {
-        let new_value = count - 1;
-        current_item.value = new_value;
+    let count_item = document.getElementById(item)
+
+    if (count_item.value > 1) {
+        if (document.title != "Корзина") {
+            let result = getInformationCard(getCardId(item));
+            let count = parseInt(count_item.value, 10);
+        
+            if (count > 1) {
+                let new_value = count - 1;
+                count_item.value = new_value;
+            }
+        }
+        else {
+            count_item.value = Number(count_item.value) + 1;
+            let result = getCardFromCart(item_id);
+            result.result_price -= result.ordinary_price * 2;
+            card.querySelector('.price-item-cart').textContent = result.result_price + "₽";
+            count_item.value = Number(count_item.value) - 2;
+            CollectSumCart();
+            
+            // сохранить количества
+            let items = JSON.parse(localStorage.getItem('items'));
+            for (let i = 0; i < items.length; i++) {
+                if (result.id == items[i].id) {
+                    items[i].count = result.count - 2;
+                    items[i].price_result = result.result_price;
+                    break;
+                }
+            }
+            localStorage.setItem('items', JSON.stringify(items));
+
+        }
     }
+
+
 }
 
 function getCardId(item) {
@@ -87,14 +143,17 @@ function getCardFromCart(item_id) {
     let item = document.getElementById("item" + item_id);
     let name = item.querySelector('h2').textContent;
     let weight = item.querySelector('p').textContent;
-    let count = item.querySelector('.counter input').value;
-    let ordinary_price = parseInt(item.querySelector('.price-item-cart').textContent) / count;
+    let count = Number(item.querySelector('.counter input').value);
+    let ordinary_price = parseInt(item.querySelector('.price-item-cart').textContent) / (count - 1);
+    let result_price = ordinary_price * count;
+
     return {
         "name" : name,
         "weight" : weight,
         "count": count,
-        "price" : ordinary_price,
-        "id" : item_id
+        "ordinary_price" : ordinary_price,
+        "id" : item_id,
+        "result_price" : result_price
     }
 }
 
