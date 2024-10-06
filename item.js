@@ -157,3 +157,70 @@ function getCardFromCart(item_id) {
     }
 }
 
+function getCardFromMemory(card_id) {
+    let items = JSON.parse(localStorage.getItem("items"))
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].id == card_id) {
+            var current_item = items[i];
+            break;
+        }
+    }
+
+    let name = current_item.name;
+    let count = Number(current_item.count);
+    let ordinary_price = current_item.ordinary_price
+    let result_price = current_item.price_result;
+
+    return {
+        "name" : name,
+        "count": count,
+        "ordinary_price" : ordinary_price,
+        "id" : card_id,
+        "result_price" : result_price
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const all_inputs = document.querySelectorAll('.counter');
+    for (let i = 0; i < all_inputs.length; i++) {
+        all_inputs[i].addEventListener('input', function() {
+            console.log(all_inputs[i]);
+            let value = this.querySelector('input');
+            
+            if (document.title == "Корзина") {
+                let card_id = getCardId(String(all_inputs[i].querySelector('input').id).replace("-detail", ""));
+                let current_card = document.querySelector("#item" + card_id) 
+                // let current_card = getCardFromCart(card_id);
+                let current_item = getCardFromMemory(card_id);
+
+                let count = current_card.querySelector(".counter input").value;
+                if (count == "") {
+                    count = 1
+                }
+
+                count = Number(count);
+                let price = current_item.ordinary_price * count;
+                current_card.querySelector(".price-item-cart").textContent = price + "₽"
+                console.log(current_item)
+
+                CollectSumCart();
+
+                items = JSON.parse(localStorage.getItem("items"));
+                for (let i = 0; i < items.length; i++) {
+                    if (items[i].id == card_id) {
+                        items[i].count = count;
+                        items[i].price_result = price;
+                    }
+                }
+
+                localStorage.setItem("items", JSON.stringify(items));
+            }
+            // Если значение отрицательное или 0, заменяем его на 1
+            if (Number(value.value) < 0) {
+                value.value = 1;
+            }
+
+        });
+    }
+})
+
