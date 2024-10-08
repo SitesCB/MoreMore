@@ -73,8 +73,68 @@
         left: 0;
     }
 
-    .about-company {
+    .price-item-cart {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
 
+    .item-4-shoes {
+        height: 100%;
+        flex-direction: column;
+    }
+
+    .item-4-shoes button {
+        height: 55px;
+        width: 100%;
+        border-radius: 10px;
+        font-size: 16px;
+    }
+    
+    .item-4-shoes p {
+        width: 100%;
+    }
+
+    
+    .item-4-prices p {
+        width: 100%;
+    }
+
+    .item-4-prices {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .price-detail {
+        margin-top: 4px;
+    }
+
+    .item-4 .counter {
+        position: relative;
+        bottom: -20px;
+    }
+
+    .item-4 .counter button {
+        width: 35px;
+        height: 35px;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        /* color: black;
+        /* background-color: rgb(80, 80, 80);
+        color: white; */
+    }
+
+    .item-4 .counter input {
+        border: none;
+    }
+
+    .item-4 .img-item-4 {
+        border-radius: 5px;
+    }
+
+    .item-4-neck .info p:nth-child(2) {
+        margin-top : -5px;
+        font-size: 14px;
     }
 }
 

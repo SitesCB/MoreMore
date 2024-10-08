@@ -83,11 +83,18 @@ function getInformationCard(card_id) {
     let card_item = 'iitem' + card_id;
     let card = document.getElementById(card_item);
     let name_item = card.querySelector(".info p").textContent;
-    // получить упаковку
+    let weight = card.querySelector(".info p:nth-child(2)").textContent;
     let count = card.querySelector("input").value;
     let price = card.querySelector('.price-item-numeric').textContent;
     let result_price = Number(count * price);
-    return {"name": name_item, "count": Number(count), "ordinary_price": price, "price_result": result_price, "id": card_id}
+    return {
+        "name": name_item,
+        "count": Number(count),
+        "weight": weight,
+        "ordinary_price": price,
+        "price_result": result_price,
+        "id": card_id,
+    }
 }
 
 function loadCartContainer() {
@@ -96,10 +103,13 @@ function loadCartContainer() {
         items = JSON.parse(localStorage.getItem('items'))
         items.forEach(item => {
             document.querySelector('.cart-container').innerHTML += `<div class="cart-item" id="item${item.id}">
-                                            <div class="img-cart"></div>
+                                            <div class="img-cart-container">
+                                                <div class="img-cart">
+                                                </div>
+                                            </div>
                                             <div class="item-info-cart">
                                                 <h2>${item.name}</h2>
-                                                <p>Упаковка: 100г</p>
+                                                <p>${item.weight}</p>
                                                 <button onclick="DeleteFromCart('item${item.id}')">
                                                     <img src="иконки/Sprite-0021.png">
                                                     <p>Удалить</p>
