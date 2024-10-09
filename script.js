@@ -34,22 +34,6 @@ function show_menu() {
     }
 }
 
-// сброс значения при изменении типа товара
-function resetValue() {
-    document.getElementById('price-detail').innerText = price;
-    document.getElementById('item1-detail').value = 1;
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    try {
-        document.getElementById('types-details').addEventListener('change', resetValue);
-    }
-    catch {
-        console.log("found error")
-    }
-});
-
-
 // убирает поп-ап, появляющийся при добавлении товара в корзину
 function hideToast() {
     document.getElementById('toast').classList.remove('show');
@@ -65,28 +49,60 @@ function AddToCart(item_id) {
     if (count == 0 || count == "") {
         return;
     }
-    let item = {
+
+    let result = {
         "name": name,
         "count": Number(count),
         "weight": weight,
-        "ordinary_price": price,
+        "ordinary_price": Number(price),
         "price_result": price * count,
         "id": item_id
     }
 
-
     let items = JSON.parse(localStorage.getItem("items"))
-    if (items == null) {
-        items = [];
-    }
-    items.push(item);
-    localStorage.setItem("items", JSON.stringify(items))
-    localStorage.setItem("count_cart", Number(localStorage.getItem("count_cart")) + 1);
-    document.getElementById("cart-counter").textContent++;
-    document.getElementById("cart-counter-block").style.opacity = 1;
+    otheritem = 1;
+    if (items && items.length != 0) {
+        console.log(result);
+        let otheritem = 1;
 
-    document.getElementById('counter-popup').textContent = 'Количество: ' + item.count;
-    document.getElementById('summary-popup').textContent = 'Сумма: ' + item.price_result + "₽";
+        for (let i = 0; i < items.length; i++) {
+            let item = items[i];
+            if (item.id == result.id && item.ordinary_price == result.ordinary_price && item.weight == result.weight) {
+
+                items[i].count += Number(result.count);
+                items[i].price_result = items[i].count * items[i].ordinary_price;
+                localStorage.setItem('items', JSON.stringify(items));
+                otheritem = 1;
+                break;
+
+            }
+            otheritem = 0;
+        }
+
+        if (!otheritem) {
+            localStorage.setItem('items', JSON.stringify(JSON.parse(localStorage.getItem('items')).concat(result)));
+            localStorage.setItem('count_cart', Number(localStorage.getItem('count_cart')) + 1);
+            document.getElementById('cart-counter').textContent = localStorage.getItem('count_cart');
+        }
+    }
+    else {
+        localStorage.setItem('items', JSON.stringify([].concat(result)));
+        addCountCart();
+        document.getElementById('cart-counter').textContent = localStorage.getItem('count_cart');
+    }
+
+    // let items = JSON.parse(localStorage.getItem("items"))
+    // if (items == null) {
+    //     items = [];
+    // }
+    // items.push(item);
+    // localStorage.setItem("items", JSON.stringify(items))
+    // localStorage.setItem("count_cart", Number(localStorage.getItem("count_cart")) + 1);
+    // document.getElementById("cart-counter").textContent++;
+    // document.getElementById("cart-counter-block").style.opacity = 1;
+
+    document.getElementById('counter-popup').textContent = 'Количество: ' + result.count;
+    document.getElementById('summary-popup').textContent = 'Сумма: ' + result.price_result + "₽";
     
     document.getElementById('toast').classList.add('show');
 
@@ -121,7 +137,7 @@ function AddToCartFromPage(card_id) {
 
         for (let i = 0; i < items.length; i++) {
             let item = items[i];
-            if (item.id == result.id && item.ordinary_price == result.ordinary_price) {
+            if (item.id == result.id && item.ordinary_price == result.ordinary_price && item.weight == result.weight) {
 
                 items[i].count += Number(result.count);
                 items[i].price_result = items[i].count * items[i].ordinary_price;
@@ -151,11 +167,13 @@ function AddToCartFromPage(card_id) {
 // обработать случай с пустым массивом и добавлением новых элементов внутрь
 
 function DeleteFromCart(item) {
-    // item = item1
+    // item = item1-w100
     // получаем конкретный id товара
-    let card_id = getCardId(item);
+    let weight = "Упаковка: " + item.split("-")[1].replace("w", "") + "г"
+    console.log(weight); // упаковка 100г
+    let card_id = getCardId(item.split("-")[0]);
     // получаем конкретный товар
-    let current_item = getCardFromCart(card_id);
+    let current_item = getCardFromCart(card_id, weight);
     let items = JSON.parse(localStorage.getItem('items'));
 
     let index = 0;
@@ -163,14 +181,25 @@ function DeleteFromCart(item) {
     // если айди и цена одинаковые, то удаляем именно его
     for (let i = 0; i < items.length; i++) {
         card_item = items[i];
-        if (card_item.id == current_item.id) {
-            console.log(card_item, card_item.id, current_item.id, i)
-            items.splice(i, 1)
+        if (card_item.id == current_item.id && card_item.weight == current_item.weight) {
+            items.splice(i, 1);
         }
     }
     
     localStorage.setItem('items', JSON.stringify(items));
-    document.getElementById(item).remove();
+    // document.getElementById(item).remove();
+    let all_items = document.querySelectorAll(".cart-item");
+    for (let i = 0; i < all_items.length; i++) {
+        let current_item = all_items[i];
+        console.log("Предмет для выцепления", current_item);
+        console.log(current_item.id, ("item" + card_id), current_item.getAttribute("value"), weight)
+        if (current_item.id == ("item" + card_id) && current_item.getAttribute("value") == weight) {
+            console.log("АААААААААА")
+            current_item.remove();
+            break;
+        }
+    }
+
     localStorage.setItem('count_cart', Number(localStorage.getItem('count_cart')) - 1);
     let count_cart = document.getElementById('cart-counter').textContent -= 1;
     if (count_cart == 0) {

@@ -1,4 +1,4 @@
-function increment(item) {
+function increment(item, weight=null) {
     let item_id = getCardId(item.replace("-detail", ""))
     let card = document.getElementById(item.replace("-detail", ""));
 
@@ -17,15 +17,19 @@ function increment(item) {
         }
     }
     else {
-        let result_card = getCardFromCart(item_id);
+
+        let result_card = getCardFromCart(item_id, weight);
+        
+        console.log(result_card)
         result_card.count = Number(count_item.value);
         result_card.result_price = result_card.count * result_card.ordinary_price;
         card.querySelector('.price-item-cart').textContent = result_card.result_price + "₽";
-        console.log(result_card);
+        
         CollectSumCart();
         let items = JSON.parse(localStorage.getItem('items'));
         for (let i = 0; i < items.length; i++) {
-            if (result_card.id == items[i].id) {
+            if (result_card.id == items[i].id && result_card.weight == items[i].weight) {
+                // console.log(result_card.id, items[i].id, result_card.weight, items[i].weight, items[i], result_card)
                 items[i].count = result_card.count;
                 items[i].price_result = result_card.result_price;
                 break;
@@ -100,7 +104,7 @@ function getInformationCard(card_id) {
         "name": name_item,
         "count": Number(count),
         "weight": weight,
-        "ordinary_price": price,
+        "ordinary_price": Number(price),
         "price_result": result_price,
         "id": card_id,
     }
@@ -111,7 +115,7 @@ function loadCartContainer() {
 
         items = JSON.parse(localStorage.getItem('items'))
         items.forEach(item => {
-            document.querySelector('.cart-container').innerHTML += `<div class="cart-item" id="item${item.id}">
+            document.querySelector('.cart-container').innerHTML += `<div class="cart-item" id="item${item.id}" value="${item.weight}">
                                             <div class="img-cart-container">
                                                 <div class="img-cart">
                                                 </div>
@@ -119,7 +123,7 @@ function loadCartContainer() {
                                             <div class="item-info-cart">
                                                 <h2>${item.name}</h2>
                                                 <p>${item.weight}</p>
-                                                <button onclick="DeleteFromCart('item${item.id}')">
+                                                <button onclick="DeleteFromCart('item${item.id}-w${item.weight.replace("Упаковка: ", "").replace("г", "")}')">
                                                     <img src="иконки/Sprite-0021.png">
                                                     <p>Удалить</p>
                                                 </button>
@@ -127,9 +131,9 @@ function loadCartContainer() {
                                             <div class="cart-count-detail-buttons">
                                                 <p class="price-item-cart">${item.price_result}₽</p>
                                                 <div class="counter">
-                                                    <button onclick="decrement('item${item.id}-detail')">-</button>
+                                                    <button onclick="decrement('item${item.id}-detail', '${item.weight}')">-</button>
                                                     <input value="${item.count}" type="number" id="item${item.id}-detail"></input>
-                                                    <button onclick="increment('item${item.id}-detail')">+</button>
+                                                    <button onclick="increment('item${item.id}-detail', '${item.weight}')">+</button>
                                                 </div>
                                             </div>
                                         </div>`
@@ -157,9 +161,19 @@ function loadCartContainer() {
 
 document.addEventListener('DOMContentLoaded', loadCartContainer)
 
-function getCardFromCart(item_id) {
-    console.log(item_id);
-    let item = document.getElementById("item" + item_id);
+function getCardFromCart(item_id, weight_search) {
+    // console.log(item_id);
+    let all_items = document.querySelectorAll(".cart-item");
+    let item = null;
+    for (let i = 0; i < all_items.length; i++) {
+        let temp_item = all_items[i];
+        // console.log(Number(temp_item.id.replace("item", "")), item_id, temp_item.querySelector("p"), weight_search)
+        if (Number(temp_item.id.replace("item", "")) == item_id && temp_item.querySelector("p").textContent == weight_search) {
+            item = temp_item;
+            break;
+        }
+    }
+    // console.log(item)
     let name = item.querySelector('h2').textContent;
     let weight = item.querySelector('p').textContent;
     let count = Number(item.querySelector('.counter input').value);
@@ -170,7 +184,7 @@ function getCardFromCart(item_id) {
         "name" : name,
         "weight" : weight,
         "count": count,
-        "ordinary_price" : ordinary_price,
+        "ordinary_price" : Number(ordinary_price),
         "id" : item_id,
         "result_price" : result_price
     }
@@ -193,7 +207,7 @@ function getCardFromMemory(card_id) {
     return {
         "name" : name,
         "count": count,
-        "ordinary_price" : ordinary_price,
+        "ordinary_price" : Number(ordinary_price),
         "id" : card_id,
         "result_price" : result_price
     }
