@@ -9,8 +9,22 @@
 
     .cart-count-detail-buttons .counter button, 
     .cart-count-detail-buttons .counter input {
-        width: 30px;
-        height: 30px;
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+        font-family: "Montserrat", sans-serif;
+    }
+
+    .cart-item .cart-count-detail-buttons {
+        padding-top: 5px;
+    }
+
+    .cart-item .cart-count-detail-buttons .counter button, 
+    .cart-item .cart-count-detail-buttons .counter input {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+        font-family: "Montserrat", sans-serif;
     }
 
     .img-cart {
@@ -60,8 +74,8 @@
     }
 
     .cart-count-detail-buttons {
-        padding-top: 20px;
-        flex-direction: column;
+        padding-top: 40px;
+        flex-direction: row;
         align-items: flex-start;
         gap: 20px;
     }
@@ -71,6 +85,10 @@
     }
     #in-cart-button {
         left: 0;
+        height: 48px;
+        width: 100%;
+        top: 0;
+        font-size: 18px;
     }
 
     .price-item-cart {
@@ -88,7 +106,7 @@
         height: 55px;
         width: 100%;
         border-radius: 10px;
-        font-size: 16px;
+        font-size: 18px;
     }
     
     .item-4-shoes p {
@@ -115,8 +133,8 @@
     }
 
     .item-4 .counter button {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
         border-radius: 10px;
         background-color: #f9f9f9;
         /* color: black;
@@ -126,6 +144,8 @@
 
     .item-4 .counter input {
         border: none;
+        width: 40px;
+        height: 40px;
     }
 
     .item-4 .img-item-4 {

@@ -7,9 +7,14 @@ function increment(item) {
     count_item.value = parseInt(document.getElementById(item).value) + 1;
     
     if (document.title != "Корзина") {
-        let result_card = getInformationCard(item_id);
-        let price = result_card.ordinary_price;
-        let count = result_card.count;
+        try {
+            let result_card = getInformationCard(item_id);
+            let price = result_card.ordinary_price;
+            let count = result_card.count;
+        }
+        catch {
+
+        }
     }
     else {
         let result_card = getCardFromCart(item_id);
@@ -18,7 +23,6 @@ function increment(item) {
         card.querySelector('.price-item-cart').textContent = result_card.result_price + "₽";
         console.log(result_card);
         CollectSumCart();
-
         let items = JSON.parse(localStorage.getItem('items'));
         for (let i = 0; i < items.length; i++) {
             if (result_card.id == items[i].id) {
@@ -41,7 +45,12 @@ function decrement(item) {
 
     if (count_item.value > 1) {
         if (document.title != "Корзина") {
-            let result = getInformationCard(getCardId(item));
+            try {
+                let result = getInformationCard(getCardId(item));
+            }
+            catch {
+                
+            }
             let count = parseInt(count_item.value, 10);
         
             if (count > 1) {
@@ -196,7 +205,6 @@ document.addEventListener("DOMContentLoaded", function() {
         all_inputs[i].addEventListener('input', function() {
             console.log(all_inputs[i]);
             let value = this.querySelector('input');
-            
             if (document.title == "Корзина") {
                 let card_id = getCardId(String(all_inputs[i].querySelector('input').id).replace("-detail", ""));
                 let current_card = document.querySelector("#item" + card_id) 

@@ -282,6 +282,7 @@ h1 {
     height : 20px;
     border-radius: 100%;
     background-color: #212121;
+    transition: .2s;
 }
 
 .cart-counter p {
@@ -325,8 +326,9 @@ h1 {
     gap : 10px;
     width : 100%;
     height : 300px;
-    background-size: cover;  
+    background-size: 100%;  
     background-position: center;
+    transition: background-size 1s ease;
 }
 
 .ad-block:nth-child(1) {
@@ -335,6 +337,11 @@ h1 {
 
 .ad-block:nth-child(2) {
     background-image: url(mockups/2.png);
+}
+
+.ad-block:hover {
+    transition: 1s;
+    background-size: 110%;
 }
 
 #vertical-block {
@@ -593,9 +600,9 @@ h1 {
 }
 
 .item-4-neck .counter input:focus {
+    outline: none;
     border : none;
-    border-top : 1px solid #f9f9f9;
-    border-bottom : 1px solid #f9f9f9;
+    
 }
 
 .item-4-shoes {
@@ -1408,6 +1415,10 @@ footer .wave {
     justify-content: flex-start;
     align-items: flex-start;
     /* background-color: red; */
+}
+
+.hat-detail .right-block button {
+    border-radius: 10px;
 }
 
 .hat-detail .right-block p {
