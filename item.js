@@ -1,10 +1,24 @@
 function increment(item, weight=null) {
     let item_id = getCardId(item.replace("-detail", ""))
-    let card = document.getElementById(item.replace("-detail", ""));
-
-    let count_item = document.getElementById(item)
+    let card;
     
-    count_item.value = parseInt(document.getElementById(item).value) + 1;
+    let all_items = document.querySelectorAll(".cart-item");
+    let count_item;
+    for (let i = 0; i < all_items.length; i++) {
+        if (all_items[i].getAttribute("value") == weight && all_items[i].id == item.replace("-detail", "")) {
+            card = all_items[i];
+            count_item = all_items[i].querySelector("input");
+            console.log(count_item)
+            break;
+        }
+    }
+    
+    try {
+        count_item.value = Number(count_item.value) + 1;
+    }
+    catch {
+        document.getElementById(item).value = Number(document.getElementById(item).value) + 1
+    }
     
     if (document.title != "Корзина") {
         try {
@@ -30,22 +44,38 @@ function increment(item, weight=null) {
         for (let i = 0; i < items.length; i++) {
             if (result_card.id == items[i].id && result_card.weight == items[i].weight) {
                 // console.log(result_card.id, items[i].id, result_card.weight, items[i].weight, items[i], result_card)
+                console.log("почему-то выбрал", items[i])
                 items[i].count = result_card.count;
                 items[i].price_result = result_card.result_price;
                 break;
             }
         }
+
+        console.log("предметы", items)
         localStorage.setItem('items', JSON.stringify(items));
     }
 
 
 }
 
-function decrement(item) {
+function decrement(item, weight=null) {
     let item_id = getCardId(item.replace("-detail", ""))
-    let card = document.getElementById(item.replace("-detail", ""));
+    let card;
+    
+    let all_items = document.querySelectorAll(".cart-item");
+    let count_item;
+    for (let i = 0; i < all_items.length; i++) {
+        if (all_items[i].getAttribute("value") == weight && all_items[i].id == item.replace("-detail", "")) {
+            card = all_items[i];
+            count_item = all_items[i].querySelector("input");
+            console.log(count_item)
+            break;
+        }
+    }
 
-    let count_item = document.getElementById(item)
+    if (count_item == null) {
+        count_item = document.querySelector("#" + item)
+    }
 
     if (count_item.value > 1) {
         if (document.title != "Корзина") {
@@ -64,7 +94,7 @@ function decrement(item) {
         }
         else {
             count_item.value = Number(count_item.value) + 1;
-            let result = getCardFromCart(item_id);
+            let result = getCardFromCart(item_id, weight);
             result.result_price -= result.ordinary_price * 2;
             card.querySelector('.price-item-cart').textContent = result.result_price + "₽";
             count_item.value = Number(count_item.value) - 2;
@@ -73,7 +103,7 @@ function decrement(item) {
             // сохранить количества
             let items = JSON.parse(localStorage.getItem('items'));
             for (let i = 0; i < items.length; i++) {
-                if (result.id == items[i].id) {
+                if (result.id == items[i].id && result.weight == items[i].weight) {
                     items[i].count = result.count - 2;
                     items[i].price_result = result.result_price;
                     break;
@@ -197,10 +227,10 @@ function getCardFromCart(item_id, weight_search) {
     }
 }
 
-function getCardFromMemory(card_id) {
+function getCardFromMemory(card_id, weight=null) {
     let items = JSON.parse(localStorage.getItem("items"))
     for (let i = 0; i < items.length; i++) {
-        if (items[i].id == card_id) {
+        if (items[i].id == card_id && items[i].weight == weight) {
             var current_item = items[i];
             break;
         }
@@ -216,7 +246,8 @@ function getCardFromMemory(card_id) {
         "count": count,
         "ordinary_price" : Number(ordinary_price),
         "id" : card_id,
-        "result_price" : result_price
+        "result_price" : result_price,
+        "weight": weight
     }
 }
 
@@ -228,9 +259,14 @@ document.addEventListener("DOMContentLoaded", function() {
             let value = this.querySelector('input');
             if (document.title == "Корзина") {
                 let card_id = getCardId(String(all_inputs[i].querySelector('input').id).replace("-detail", ""));
-                let current_card = document.querySelector("#item" + card_id) 
-                // let current_card = getCardFromCart(card_id);
-                let current_item = getCardFromMemory(card_id);
+                
+                let current_card = this.parentNode.parentNode
+                let weight = current_card.getAttribute("value")
+
+                console.log("cur", current_card)
+                
+                let current_item = getCardFromMemory(card_id, weight);
+                console.log("curr", current_item)
 
                 let count = current_card.querySelector(".counter input").value;
                 if (count == "") {
@@ -246,7 +282,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 items = JSON.parse(localStorage.getItem("items"));
                 for (let i = 0; i < items.length; i++) {
-                    if (items[i].id == card_id) {
+                    if (items[i].id == card_id && items[i].weight == weight) {
                         items[i].count = count;
                         items[i].price_result = price;
                     }
@@ -255,6 +291,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 localStorage.setItem("items", JSON.stringify(items));
             }
             // Если значение отрицательное или 0, заменяем его на 1
+            console.log(Number(value.value))
             if (Number(value.value) < 0) {
                 value.value = 1;
             }

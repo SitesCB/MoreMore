@@ -510,30 +510,29 @@
                             <div class="stick"></div>
                         </div>
                         <div class="container-4">
-                            <a class="item-4">
-                                <div class="img-item-4">
-        
-                                </div>
+                            <div class="item-4" id="iitem3">
+                                <a class="img-item-4" href="item.html">
+                                    <p>Рабочая карточка</p>
+                                </a>
                                 <div class="item-4-neck">
                                     <div class="info">
                                         <p>Название</p>
-                                        
+                                        <p>Упаковка: 150г</p>
                                     </div>
                                     <div class="counter">
-                                        <button>-</button>
-                                        <input value="1" type="number"></input>
-                                        <button>+</button>
+                                        <button onclick="decrement('item3')">-</button>
+                                        <input value="1" type="number" id="item3"></input>
+                                        <button onclick="increment('item3')">+</button>
                                     </div>
                                 </div>
                                 <div class="item-4-shoes">
                                     <div class="item-4-prices">
-                                        <p>От 500 Р</p>
-                                        <p>От 100 Р</p>
+                                        <p>От 500 ₽</p>
+                                        <p>От <span class="price-item-numeric">100</span> ₽</p>
                                     </div>
-                                    
-                                    <button>В корзину</button>
+                                    <button onclick="AddToCartFromPage(3)">В корзину</button>
                                 </div>
-                            </a>
+                            </div>
                             <a class="item-4">
                                 <div class="img-item-4">
         
