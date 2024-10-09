@@ -170,6 +170,7 @@ function getCardFromCart(item_id, weight_search) {
         // console.log(Number(temp_item.id.replace("item", "")), item_id, temp_item.querySelector("p"), weight_search)
         if (Number(temp_item.id.replace("item", "")) == item_id && temp_item.querySelector("p").textContent == weight_search) {
             item = temp_item;
+            console.log(item);
             break;
         }
     }
@@ -177,7 +178,13 @@ function getCardFromCart(item_id, weight_search) {
     let name = item.querySelector('h2').textContent;
     let weight = item.querySelector('p').textContent;
     let count = Number(item.querySelector('.counter input').value);
-    let ordinary_price = parseInt(item.querySelector('.price-item-cart').textContent) / (count - 1);
+    let ordinary_price;
+    if (count == 1) {
+        ordinary_price = parseInt(item.querySelector('.price-item-cart').textContent);
+    }
+    else {
+        ordinary_price = parseInt(item.querySelector('.price-item-cart').textContent) / (count - 1);
+    }
     let result_price = ordinary_price * count;
 
     return {

@@ -156,6 +156,10 @@
         margin-top : -5px;
         font-size: 14px;
     }
+
+    .item-info-cart p {
+        font-size: 12px;
+    }
 }
 
 @media screen and (max-width: 1024px) {
