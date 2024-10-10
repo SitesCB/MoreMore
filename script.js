@@ -251,3 +251,5 @@ function CollectSumCart() {
 
 CollectSumCart();
 
+// комментарий
+
