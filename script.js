@@ -91,16 +91,6 @@ function AddToCart(item_id) {
         document.getElementById('cart-counter').textContent = localStorage.getItem('count_cart');
     }
 
-    // let items = JSON.parse(localStorage.getItem("items"))
-    // if (items == null) {
-    //     items = [];
-    // }
-    // items.push(item);
-    // localStorage.setItem("items", JSON.stringify(items))
-    // localStorage.setItem("count_cart", Number(localStorage.getItem("count_cart")) + 1);
-    // document.getElementById("cart-counter").textContent++;
-    // document.getElementById("cart-counter-block").style.opacity = 1;
-
     document.getElementById('counter-popup').textContent = 'Количество: ' + result.count;
     document.getElementById('summary-popup').textContent = 'Сумма: ' + result.price_result + "₽";
     
@@ -206,6 +196,7 @@ function DeleteFromCart(item) {
         document.getElementById("cart-counter-block").style.opacity = 0;
     }
     CollectSumCart();
+    clearCartPage();
 }
 
 function addCountCart() {
@@ -251,5 +242,30 @@ function CollectSumCart() {
 
 CollectSumCart();
 
-// комментарий
+function countCart() {
+    let items = JSON.parse(localStorage.getItem("items"));
+    let len;
+    try {
+        len = items.length
+    }
+    catch {
+        len = 0;
+    }
+    return Boolean(len)
+}
+
+function clearCartPage() {
+    if (document.title == "Корзина" && !countCart()) {
+        document.querySelector(".cart-page").innerHTML = `
+        <div class="empty-cart">
+            <img src="mockups/empty cart.png">
+            <h1>Корзина пуста</h1>
+            <a href="index.html">Вернуться к покупкам</a>
+        </div>
+        `;
+    }
+}
+
+
+document.addEventListener("DOMContentLoaded", clearCartPage())
 

@@ -1937,3 +1937,37 @@ fieldset {
 #recomend-title .stick {
     width: 25%;
 }
+
+.empty-cart {
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Montserrat", sans-serif;
+}
+
+.empty-cart h1 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.empty-cart img {
+    width: 300px;
+    height: auto
+}
+
+.empty-cart a {
+    text-align: center;
+    text-decoration: none;
+    width: 300px;
+    height: 40px;
+    background-color: #ee804e;
+    color: white;
+    /* border: 1px solid #d9d9d9; */
+    padding-top: 20px;
+    font-size: 20px;
+    border-radius: 30px;
+}
