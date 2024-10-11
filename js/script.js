@@ -95,11 +95,13 @@ function AddToCart(item_id) {
     document.getElementById('summary-popup').textContent = 'Сумма: ' + result.price_result + "₽";
     
     document.getElementById('toast').classList.add('show');
+    document.querySelector('#cart-counter-block').style.opacity = 1;
 
     info.querySelector(".counter input").value = 1;
 }
 
 function CorrectPriceToWeight(card_id) {
+    // функция для изменения цены товара относительно его веса
     // позднее через АПИ обработать
 }
 

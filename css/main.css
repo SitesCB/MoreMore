@@ -332,11 +332,11 @@ h1 {
 }
 
 .ad-block:nth-child(1) {
-    background-image: url(mockups/1.png);
+    background-image: url(../mockups/1.png);
 }
 
 .ad-block:nth-child(2) {
-    background-image: url(mockups/2.png);
+    background-image: url(../mockups/2.png);
 }
 
 .ad-block:hover {
@@ -345,7 +345,7 @@ h1 {
 }
 
 #vertical-block {
-    background-image: url(mockups/3.png);
+    background-image: url(../mockups/3.png);
 }
 
 .ad-block img {
@@ -1964,7 +1964,7 @@ fieldset {
     text-decoration: none;
     width: 300px;
     height: 40px;
-    background-color: #ee804e;
+    background-color: #403b3c;
     color: white;
     /* border: 1px solid #d9d9d9; */
     padding-top: 20px;
