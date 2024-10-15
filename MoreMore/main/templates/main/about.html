@@ -1,0 +1,114 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %}Главная{% endblock title %}
+{% block content %}
+
+{% include "main/components/header.html" %}
+<main>
+    <section class="items-4-block" id="home-section">
+        <div class="site-container to-center">
+            <div class="content">
+                <div class="title-section" id="why-us-block">
+                    <div class="stick"></div>
+                    <h1>Преимущества</h1>
+                    <div class="stick"></div>
+                </div>
+                <div class="site-container to-center about-us-block">
+                    <div class="block-about">
+                        <h1>1</h1>
+                        <p>При заказе до 12:00, доставка в тот же день</p>
+                    </div>
+                    <div class="block-about">
+                        <h1>2</h1>
+                        <p>Только качественные поставщики</p>
+                    </div>
+                    <div class="block-about">
+                        <h1>3</h1>
+                        <p>Большой выбор продукции</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="items-4-block">
+        <div class="site-container to-center">
+            <div class="content">
+                <div class="title-section" id="categories-us-block">
+                    <div class="stick"></div>
+                    <h1>Наш ассортимент</h1>
+                    <div class="stick"></div>
+                </div>
+                <div class="site-container to-center about-us-block all-categories">
+                    <div class="category-container">
+                        <a class="category-us-icon" href="category.html">
+                            <img src="{% static 'main/images/category/икра.png' %}">
+                            <p>Икра</p>
+                        </a>
+                        <a class="category-us-icon" href="#">
+                            <img src="{% static 'main/images/category/крабы.png' %}">
+                            <p>Крабы</p>
+                        </a>
+                        <a class="category-us-icon" href="#">
+                            <img src="{% static 'main/images/category/креветки.png' %}">
+                            <p>Креветки</p>
+                        </a>
+                        <a class="category-us-icon" href="#">
+                            <img src="{% static 'main/images/category/морепродукты.png' %}">
+                            <p>Морепродукты</p>
+                        </a>
+                        <a class="category-us-icon" href="#">
+                            <img src="{% static 'main/images/category/консервы.png' %}">
+                            <p>Морепродукты</p>
+                        </a>
+                        <a class="category-us-icon" href="#">
+                            <img src="{% static 'main/images/category/рыба.png' %}">
+                            <p>Рыба</p>
+                        </a>
+                        <a class="category-us-icon" href="#">
+                            <img src="{% static 'main/images/category/филе и стейки.png' %}">
+                            <p>Филе и стейки</p>
+                        </a>
+                        <a class="category-us-icon" href="#">
+                            <img src="{% static 'main/images/category/полуфабрикаты.png' %}">
+                            <p>Полуфабрикаты</p>
+                        </a>
+                        <a class="category-us-icon" href="#">
+                            <img src="{% static 'main/images/category/бады и витамины.png' %}">
+                            <p>Бады и витамины</p>
+                        </a>
+                        <a class="category-us-icon" href="#">
+                            <img src="{% static 'main/images/category/заправка для рыбы.png' %}">
+                            <p>Заправка для рыбы</p>
+                        </a>
+                        <a class="category-us-icon" href="#">
+                            <img src="{% static 'main/images/category/сыры.png' %}">
+                            <p>Сыры</p>
+                        </a>
+                        <a class="category-us-icon" href="#">
+                            <img src="{% static 'main/images/category/под пивас.png' %}">
+                            <p>Под пивас</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="items-4-block">
+        <div class="site-container to-center">
+            <div class="content">
+                <div class="title-section" id="categories-us-block">
+                    <div class="stick"></div>
+                    <h1>О компании</h1>
+                    <div class="stick"></div>
+                </div>
+                <div class="site-container to-center about-us-block about-company">
+                    <p>Каждый товар в нашем ассортименте высокого уровня качества. Мы заботимся над тем, чтобы клиенты были довольны покупкой и удобством использования нашего сервиса.
+                        <br>Наши товары постепенно появляются на полках магазинов и в данный момент вы сможете их приобрести по адресу ул. Большая Печерская, 38 в магазине “Фамиль”</p>
+                    <img src="{% static 'main/images/mockups/Фамиль.png' %}">
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% include "main/components/footer.html" %}
+{% endblock content %}

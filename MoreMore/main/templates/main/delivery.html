@@ -1,0 +1,130 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %}Главная{% endblock title %}
+{% block content %}
+
+{% include "main/components/header.html" %}
+<main>
+    <section class="items-4-block" id="home-section">
+        <div class="site-container to-center">
+            <div class="content">
+                <div class="title-section">
+                    <div class="stick"></div>
+                    <h1>Доставка</h1>
+                    <div class="stick"></div>
+                </div>
+                <div class="delivery-blocks">
+                    <div class="left-delivery-block">
+                        <div class="content">
+                            <h1>Способы заказа</h1>
+                            <div class="block-icon-header-text">
+                                <img src="{% static 'main/images/icons/Sprite-0007.png' %}">
+                                <div class="header-text">
+                                    <h2>У нас на сайте</h2>
+                                    <p>Вы можете оформить заказ у нас на сайте, добавив нужные товары в корзину</p>
+                                </div>
+                            </div>
+                            <div class="block-icon-header-text">
+                                <img src="{% static 'main/images/icons/Sprite-0008.png' %}">
+                                <div class="header-text">
+                                    <h2>По телефону</h2>
+                                    <p>Позвоните по телефону <br>+7 (986) 766-99-31</p>
+                                </div>
+                            </div>
+                            <div class="block-icon-header-text">
+                                <img src="{% static 'main/images/icons/Sprite-0009.png' %}">
+                                <div class="header-text">
+                                    <h2>Через телеграмм канал</h2>
+                                    <p>Новые акции, предложения и товары вы можете увидеть, а также заказать в нашем телеграмм канале</p>
+                                </div>
+                            </div>
+                            <h1>Способы получения</h1>
+                            <div class="block-icon-header-text">
+                                <img src="{% static 'main/images/icons/Sprite-0010.png' %}">
+                                <div class="header-text">
+                                    <h2>Доставка</h2>
+                                    <p>Новые акции, предложения и товары вы можете увидеть, а также заказать в нашем телеграмм канале</p>
+                                </div>
+                            </div>
+                            <div class="block-icon-header-text">
+                                <img src="{% static 'main/images/icons/Sprite-0011.png' %}">
+                                <div class="header-text">
+                                    <h2>Самовывоз</h2>
+                                    <p>Новые акции, предложения и товары вы можете увидеть, а также заказать в нашем телеграмм канале</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-delivery-block">
+                        <div class="content">
+                            <h1>Мы на карте</h1>
+                            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A9e2e9f95a9527bc8f74362d0fd3202588224be08d1f005a327c75e0495680e42&amp;source=constructor" width="500" height="400" id="map" frameborder="0"></iframe>
+                            <h1>Пункты и стоимость</h1>
+                            <div class="block-icon-header-text">
+                                <img src="{% static 'main/images/icons/Sprite-0012.png' %}">
+                                <div class="header-text">
+                                    <h2>Стоимость доставки</h2>
+                                    <p>Стоимость доставки 300₽<br>При заказе от 2000₽ доставка бесплатная</p>
+                                </div>
+                            </div>
+                            <div class="block-icon-header-text">
+                                <img src="{% static 'main/images/icons/Sprite-0013.png' %}">
+                                <div class="header-text">
+                                    <h2>Города</h2>
+                                    <p>Нижний Новгород<br>Кстово</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="items-4-block">
+        <div class="site-container to-center">
+            <div class="content big-icons">
+                <div class="title-section">
+                    <div class="stick"></div>
+                    <h1 id="payment-header">Оплата</h1>
+                    <div class="stick"></div>
+                </div>
+                <h2 class="to-center unheader-style">При доставке</h2>
+                <div class="delivery-blocks">
+                    <div class="left-delivery-block big-ico-block">
+                        <div class="content">
+                            <img src="{% static 'main/images/icons/Sprite-0014.png' %}">
+                            <h2>Наличными</h2>
+                            <p>Оплату можно произвести наличными при получении товара</p>
+                        </div>
+                    </div>
+                    <div class="right-delivery-block big-ico-block">
+                        <div class="content">
+                            <img src="{% static 'main/images/icons/Sprite-0015.png' %}">
+                            <h2>Через терминал</h2>
+                            <p>Есть возможность оплаты через терминал</p>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="to-center unheader-style">Оформление через сайт</h2>
+                <div class="delivery-blocks">
+                    <div class="left-delivery-block big-ico-block">
+                        <div class="content">
+                            <img src="{% static 'main/images/icons/Sprite-0016.png' %}">
+                            <h2>Наличными</h2>
+                            <p>Оплату можно произвести наличными при получении товара</p>
+                        </div>
+                    </div>
+                    <div class="right-delivery-block big-ico-block">
+                        <div class="content">
+                            <img src="{% static 'main/images/icons/Sprite-0017.png' %}">
+                            <h2>Через терминал</h2>
+                            <p>Есть возможность оплаты через терминал</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% include "main/components/footer.html" %}
+{% endblock content %}

@@ -1,0 +1,32 @@
+{% load static %}
+<div class="wave" id="top-wave">
+    <img src="{% static 'main/images/mockups/wave.png' %}">
+</div>
+<footer>
+    <div class="site-container to-center">
+        
+        <div class="content">
+            <div class="img-bottom-block">
+                <img src="{% static 'main/images/icons/море низ.png' %}" id="lower-logo">
+            </div>
+            <div class="socials">
+                <a><img src="{% static 'main/images/icons/Sprite-0003.png' %}"></a>
+                <a><img src="{% static 'main/images/icons/Sprite-0004.png' %}"></a>
+                <a><img src="{% static 'main/images/icons/Sprite-0005.png' %}"></a>
+                <a><img src="{% static 'main/images/icons/Sprite-0006.png' %}"></a>
+            </div>
+            <div class="socials">
+                <a href="{% url 'index' %}" class="open-page">Главная</a>
+                <a href="{% url 'delivery' %}">Доставка и оплата</a>
+                <a href="{% url 'about' %}">О нас</a>
+                <a href="{% url 'contacts' %}">Контакты</a>
+            </div>
+            <div class="wave" id="bottom-wave">
+                <p>© Море&More. Все права защищены</p>
+                <img src="{% static 'main/images/mockups/wave2.png' %}">
+                <img src="{% static 'main/images/mockups/якорь.png' %}">
+            </div>
+        </div>
+    </div>
+    
+</footer>

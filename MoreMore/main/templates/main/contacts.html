@@ -1,0 +1,79 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %}Главная{% endblock title %}
+{% block content %}
+
+{% include "main/components/header.html" %}
+<main>
+    <section class="items-4-block" id="home-section">
+        <div class="site-container to-center">
+            <div class="content contacts">
+                <div class="title-section" id="why-us-block">
+                    <div class="stick"></div>
+                    <h1>Связаться с нами</h1>
+                    <div class="stick"></div>
+                </div>
+                <p>Если у вас есть какие-либо предложения или остались вопросы, оставьте нам сообщение</p>
+                <div class="site-container to-center about-us-block">
+                    <div class="left-contacts">
+                        <form method="post">
+                            <div class="block-input-contacts">
+                                <label>Ваше имя</label>
+                                <input required name="name">
+                            </div>
+                            <div class="block-input-contacts">
+                                <label>Номер телефона</label>
+                                <input required name="phone">
+                            </div>
+                            <div class="block-input-contacts">
+                                <label>Сообщение</label>
+                                <input required name="message">
+                            </div>
+                            <button>Отправить</button>
+                            <div class="political-block-form">
+                                <input type="checkbox" required>
+                                <p>Я прочитал и согласен с <a href="privacy.html">политикой обработки данных</a></p>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <div class="right-contacts">
+                        <h2>Контактная информация</h2>
+                        <div class="icon-text-block">
+                            <img src="{% static 'main/images/icons/Sprite-0022.png' %}">
+                            <div class="icon-header-text-block">
+                                <h4>Адрес</h4>
+                                <p>г. Нижний Новгород, ул. Торфяная 32</p>
+                            </div>
+                        </div>
+                        <div class="icon-text-block">
+                            <img src="{% static 'main/images/icons/Sprite-0019.png' %}">
+                            <div class="icon-header-text-block">
+                                <h4>Наш телефон</h4>
+                                <p>+7(986)-766-99-31</p>
+                            </div>
+                        </div>
+                        <div class="icon-text-block">
+                            <img src="{% static 'main/images/icons/Sprite-0020.png' %}">
+                            <div class="icon-header-text-block">
+                                <h4>Наша почта</h4>
+                                <p>more-more-nn@yandex.ru</p>
+                            </div>
+                        </div>
+                        <h2>Наши соцсети</h4>
+                        <div class="socials-block-contacts">
+                            <a><img src="{% static 'main/images/icons/Sprite-0024.png' %}"></a>
+                            <a><img src="{% static 'main/images/icons/Sprite-0026.png' %}"></a>
+                            <a><img src="{% static 'main/images/icons/Sprite-0023.png' %}"></a>
+                            <a><img src="{% static 'main/images/icons/Sprite-0025.png' %}"></a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% include "main/components/footer.html" %}
+{% endblock content %}
+        

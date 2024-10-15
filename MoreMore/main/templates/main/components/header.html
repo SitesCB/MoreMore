@@ -1,0 +1,110 @@
+{% load static %}
+<header id="header">
+    <div class="hat-block">
+        <div class="site-container">
+            <div class="left-block">
+                <a href="{% url 'index' %}">Главная</a>
+                <a href="{% url 'delivery' %}">Доставка и оплата</a>
+                <a href="{% url 'about' %}">О нас</a>
+                <a href="{% url 'contacts' %}">Контакты</a>
+            </div>
+            <div class="right-block">
+                <p>г.Нижний Новгород, ул. Торфяная 32</p>
+            </div>
+        </div>
+    </div>
+    <div class="neck-block">
+        <div class="site-container">
+            <a href="{% url 'index' %}"><img src="{% static 'main/images/icons/море верх.png' %}" id="more-up-img"></a>
+            <div class="mark-block">
+                <div>
+                    <p>Принимаем заказы</p>
+                    <h1>С 8:00 до 22:00</h1>
+                </div>
+                
+            </div>
+            <div class="mark-block">
+                <div>
+                    <p>Оформить заказ</p>
+                    <h1>+7(986)-766-99-31</h1>
+                </div>
+            </div>
+            <div class="mark-block">
+                <div>
+                    <p>Бесплатная доставка</p>
+                    <h1>От 2000₽</h1>
+                </div>
+            </div>    
+        </div>
+    </div>
+    
+    <div class="black-surface" id="black-surface" onclick="show_menu()">
+
+    </div>
+    
+
+    <div class="popup-added" id="toast">
+        <div class="header">
+            <p>Товар добавлен в корзину</p>
+            <div class="close-button-block" id="liveToastBtn">
+                <button class="close-button" onclick="hideToast()"><img src="{% static 'main/images/icons/close.png' %}"></button>
+            </div>
+        </div>
+        <div class="body">
+            <div>
+                <p>Название товара</p>
+                <p id="counter-popup">Количество:</p>
+                <p id="summary-popup">Сумма:</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu" id="products-menu">
+        <div class="header-products-menu">
+            <h1>Меню</h1>
+            <button onclick="show_menu()"><img src="{% static 'main/images/icons/close.png' %}"></button>
+        </div>
+        <div class="body-menu">
+            <ul>
+                <a href="category.html"><li>Икра</li></a>
+                <a href="#"><li>Краб</li></a>
+                <a href="#"><li>Креветки</li></a>
+                <a href="#"><li>Морепродукты</li></a>
+                <a href="#"><li>Консервы</li></a>
+                <a href="#"><li>Рыба</li></a>
+                <a href="#"><li>Филе и стейки</li></a>
+                <a href="#"><li>Полуфабрикаты</li></a>
+                <a href="#"><li>Витамины и бады</li></a>
+                <a href="#"><li>Заправка для рыбы</li></a>
+                <a href="#"><li>Сыры</li></a>
+                <a href="#"><li>Под пивас</li></a>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="menu-block" id="menu">
+        <div class="site-container">
+            <div class="block-left-menu">
+                <div class="button-text-menu">
+                    <button onclick="show_menu()"><img src="{% static 'main/images/icons/burger.png' %}"></button>
+                    <p>Меню</p>
+                </div>
+                <form class="search-form" action="search.html" method="get">
+                    <input placeholder="Поиск..." value="" name="search">
+                    <button><img src="{% static 'main/images/icons/Sprite-0001.png' %}"></button>
+                </form>
+            </div>
+            <div class="block-right-menu">
+                <div class="cart">
+                    <div class="cart-counter" id="cart-counter-block">
+                        <p id="cart-counter">0</p>
+                    </div>
+                    <a href="cart.html">
+                        <img src="{% static 'main/images/icons/Sprite-0002.png' %}" width="30px" height="30px">
+                        <p>Корзина</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
