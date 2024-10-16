@@ -12,3 +12,9 @@ def delivery(request):
 
 def contacts(request):
     return render(request, 'main/contacts.html')
+
+def cart(request):
+    return render(request, 'main/cart.html')
+
+def privacy(request):
+    return render(request, 'main/privacy.html')

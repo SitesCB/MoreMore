@@ -260,9 +260,9 @@ function clearCartPage() {
     if (document.title == "Корзина" && !countCart()) {
         document.querySelector(".cart-page").innerHTML = `
         <div class="empty-cart">
-            <img src="mockups/empty cart.png">
+            <img src="/static/main/images/mockups/empty cart.png">
             <h1>Корзина пуста</h1>
-            <a href="index.html">Вернуться к покупкам</a>
+            <a href="..">Вернуться к покупкам</a>
         </div>
         `;
     }

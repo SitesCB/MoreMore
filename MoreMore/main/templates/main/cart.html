@@ -1,0 +1,62 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %}Корзина{% endblock title %}
+{% block content %}
+
+{% include "main/components/header.html" %}
+<main>
+    <section class="items-4-block" id="home-section">
+        <div class="site-container to-center">
+            <div class="content cart-page">
+                <div class="title-section" id="why-us-block">
+                    <div class="stick"></div>
+                    <h1>Корзина</h1>
+                    <div class="stick"></div>
+                </div>
+                <div class="blocks-cart">
+                    <div class="left-cart">
+                        <div class="cart-container">
+
+                        </div>
+                    </div>
+                    <div class="right-cart">
+                        <form class="cart-form" method="post" action="payment/">
+                            <h1>Контактные данные</h1>
+                            <div class="user-contact-input">
+                                <input type="text" required name="phone" placeholder="Номер телефона">
+                                <input type="text" required name="name" placeholder="Ваше имя">
+                            </div>
+                            <h1>Адрес доставки</h1>
+                            <fieldset>
+                                <div class="cart-radio">
+                                    <input type="radio" id="nn-city" name="city" value="Нижний Новгород" checked />
+                                    <label for="nn-city">Нижний Новгород</label>
+                                </div>
+                                <div class="cart-radio">
+                                    <input type="radio" id="kstovo-city" name="city" value="Кстово" />
+                                    <label for="kstovo-city">Кстово</label>
+                                </div>
+                            </fieldset>
+                            <input type="text" required name="location" placeholder="Улица, дом, кв.">
+                            <h1>Способ оплаты</h1>
+                            <fieldset>
+                                <div class="cart-radio">
+                                    <input type="radio" id="before-payment" name="payment-type" value="before-payment" checked>
+                                    <label for="before-payment">Оплата на сайте</label>
+                                </div>
+                                <div class="cart-radio">
+                                    <input type="radio" id="after-payment" name="payment-type" value="after-payment">
+                                    <label for="after-payment">После получения</label>
+                                </div>
+                            </fieldset>
+                            <button type="submit">Перейти к оформлению</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% include "main/components/footer.html" %}
+
+{% endblock content %}

@@ -1,6 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
-{% block title %}Главная{% endblock title %}
+{% block title %}Контакты{% endblock title %}
 {% block content %}
 
 {% include "main/components/header.html" %}
@@ -32,7 +32,7 @@
                             <button>Отправить</button>
                             <div class="political-block-form">
                                 <input type="checkbox" required>
-                                <p>Я прочитал и согласен с <a href="privacy.html">политикой обработки данных</a></p>
+                                <p>Я прочитал и согласен с <a href="{% url 'privacy' %}">политикой обработки данных</a></p>
                             </div>
                             
                         </form>
@@ -60,7 +60,7 @@
                                 <p>more-more-nn@yandex.ru</p>
                             </div>
                         </div>
-                        <h2>Наши соцсети</h4>
+                        <h2>Наши соцсети</h2>
                         <div class="socials-block-contacts">
                             <a><img src="{% static 'main/images/icons/Sprite-0024.png' %}"></a>
                             <a><img src="{% static 'main/images/icons/Sprite-0026.png' %}"></a>

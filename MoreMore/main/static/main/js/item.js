@@ -154,7 +154,7 @@ function loadCartContainer() {
                                                 <h2>${item.name}</h2>
                                                 <p>${item.weight}</p>
                                                 <button onclick="DeleteFromCart('item${item.id}-w${item.weight.replace("Упаковка: ", "").replace("г", "")}')">
-                                                    <img src="иконки/Sprite-0021.png">
+                                                    <img src="/static/main/images/icons/Sprite-0021.png">
                                                     <p>Удалить</p>
                                                 </button>
                                             </div>
