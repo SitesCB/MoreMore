@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
@@ -7,5 +9,7 @@ urlpatterns = [
     path('delivery/', delivery, name='delivery'),
     path('contacts/', contacts, name='contacts'),
     path('cart/', cart, name='cart'),
-    path('privacy', privacy, name='privacy')
-]
+    path('privacy', privacy, name='privacy'),
+    path('items/<str:category>/<slug:name>', detail_page),
+    path('api/items/<slug:name>/<str:size>', get_price_weight)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

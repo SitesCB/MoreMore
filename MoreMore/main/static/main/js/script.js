@@ -114,6 +114,7 @@ function AddToCartFromPage(card_id) {
         return;
     }
     console.log(result);
+    document.getElementById('name-popup').textContent = result.name;
     document.getElementById('counter-popup').textContent = 'Количество: ' + result.count;
     document.getElementById('summary-popup').textContent = 'Сумма: ' + result.price_result + "₽";
     
@@ -161,7 +162,14 @@ function AddToCartFromPage(card_id) {
 function DeleteFromCart(item) {
     // item = item1-w100
     // получаем конкретный id товара
-    let weight = "Упаковка: " + item.split("-")[1].replace("w", "") + "г"
+    console.log(item);
+    let weight;
+    if (item.split("-")[1].replace("w", "") < 10) {
+        weight = "Упаковка: " + item.split("-")[1].replace("w", "") + "кг"
+    }
+    else {
+        weight = "Упаковка: " + item.split("-")[1].replace("w", "") + "гр"
+    }
     console.log(weight); // упаковка 100г
     let card_id = getCardId(item.split("-")[0]);
     // получаем конкретный товар

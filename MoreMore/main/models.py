@@ -45,6 +45,18 @@ class ItemModel(models.Model):
     def get_absolute_url(self):
         return f'items/{self.category.slug}/{self.slug}'
 
+    def get_all_weights(self):
+        self.weight = WeightItem.objects.filter(for_item=self)
+        return self.weight
+
+    def get_minimal_weight(self):
+        self.weight = self.get_all_weights()
+        self.current_weight = self.weight[0]
+        for weight in self.weight:
+            if self.current_weight.price > weight.price:
+                self.current_weight = weight
+        return self.current_weight
+
     def __str__(self):
         return self.name
 
@@ -59,7 +71,7 @@ class WeightItem(models.Model):
     price = models.IntegerField(verbose_name='Цена за единицу товара')
 
     def __str__(self):
-        return f'{self.for_item.name} - {self.price}'
+        return f'{self.for_item.name} - {self.price} - {self.size}'
 
     class Meta:
         verbose_name = 'Размер'

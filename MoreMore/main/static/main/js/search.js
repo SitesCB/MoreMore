@@ -1,1 +1,1 @@
-document.getElementById("searcher").value = "Запрос";
+// document.getElementById("searcher").value = "Запрос";

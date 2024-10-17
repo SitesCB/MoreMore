@@ -1,0 +1,20 @@
+<div class="item-4" id="iitem{{ item.id }}">
+    <a class="img-item-4" href="{{ item.get_absolute_url }}">
+        <img class="img-item-4-img" src="media/{{ item.image }}">
+    </a>
+    <div class="item-4-neck">
+        <div class="info">
+            <p>{{ item.name }}</p>
+            <p>Упаковка: {{ item.get_minimal_weight.size }}</p>
+        </div>
+        <div class="counter">
+            <button onclick="decrement('item{{ item.id }}')">-</button>
+            <input value="1" type="number" id="item{{ item.id }}">
+            <button onclick="increment('item{{ item.id }}')">+</button>
+        </div>
+    </div>
+    <div class="item-4-shoes">
+        <p class="price-detail">От <span class="price-item-numeric">{{ item.get_minimal_weight.price }}</span> ₽</p>
+        <button onclick="AddToCartFromPage({{ item.id }})">В корзину</button>
+    </div>
+</div>

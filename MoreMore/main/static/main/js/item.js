@@ -153,7 +153,7 @@ function loadCartContainer() {
                                             <div class="item-info-cart">
                                                 <h2>${item.name}</h2>
                                                 <p>${item.weight}</p>
-                                                <button onclick="DeleteFromCart('item${item.id}-w${item.weight.replace("Упаковка: ", "").replace("г", "")}')">
+                                                <button onclick="DeleteFromCart('item${item.id}-w${item.weight.replace("Упаковка: ", "").replace("гр", "").replace("кг", "")}')">
                                                     <img src="/static/main/images/icons/Sprite-0021.png">
                                                     <p>Удалить</p>
                                                 </button>
@@ -300,3 +300,39 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 })
 
+document.addEventListener('DOMContentLoaded', function() {
+    let item_name = document.title;
+    let options = document.querySelector('select');
+    options.addEventListener('change', function() {
+        fetch("/api/items/ikra-chernaya/" + options.value)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok " + response.statusText);
+            }
+            return response.json()
+        })
+        .then(data => {
+            console.log("Response:", data);
+            document.querySelector('#price-detail').textContent = data.price;
+
+        })
+        .catch(error => {
+            console.error("There was a problem with the fetch operation:", error);
+        });
+    })
+    
+})
+
+// fetch("/api/items/ikra-chernaya/500гр")
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error("Network response was not ok " + response.statusText);
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         console.log("Response:", data);
+//     })
+//     .catch(error => {
+//         console.error("There was a problem with the fetch operation:", error);
+//     });

@@ -144,6 +144,9 @@
                     <div class="stick"></div>
                 </div>
                 <div class="container-4">
+                    {% for item in items %}
+                        {% include 'main/components/card-4.html' with item=item %}
+                    {% endfor %}
                     <div class="item-4" id="iitem1">
                         <a class="img-item-4" href="item.html">
                             <p>Рабочая карточка</p>
