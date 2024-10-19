@@ -8,41 +8,89 @@ def index(request):
     items = ItemModel.objects.all()
     context = {
         'categories': categories,
-        'items': items
+        'items': items[:8]
     }
     return render(request, 'main/index.html', context=context)
 
 def about(request):
-    return render(request, 'main/about.html')
+    categories = CategoryModel.objects.all()
+    context = {
+        'categories': categories
+    }
+    return render(request, 'main/about.html', context=context)
 
 def delivery(request):
-    return render(request, 'main/delivery.html')
+    categories = CategoryModel.objects.all()
+    context = {
+        'categories': categories
+    }
+    return render(request, 'main/delivery.html', context=context)
 
 def contacts(request):
-    return render(request, 'main/contacts.html')
+    categories = CategoryModel.objects.all()
+    context = {
+        'categories': categories
+    }
+    return render(request, 'main/contacts.html', context=context)
 
 def cart(request):
-    return render(request, 'main/cart.html')
+    categories = CategoryModel.objects.all()
+    context = {
+        'categories': categories
+    }
+    return render(request, 'main/cart.html', context=context)
 
 def privacy(request):
-    return render(request, 'main/privacy.html')
+    categories = CategoryModel.objects.all()
+    context = {
+        'categories': categories
+    }
+    return render(request, 'main/privacy.html', context=context)
 
 def detail_page(request, category, name):
     item = ItemModel.objects.filter(slug=name)[0]
+    categories = CategoryModel.objects.all()
     weights = item.get_all_weights()
     context = {
         'item': item,
-        'weights': weights
+        'weights': weights,
+        'categories': categories
     }
     return render(request, 'main/item.html', context=context)
 
 def get_price_weight(request, name, size):
     ''' Получение цены за вес определенного товара '''
     item = ItemModel.objects.get(slug=name)
-
     price = WeightItem.objects.filter(for_item=item.id, size=size)[0].price
-    print(price)
+
     result = {
-        'price': price
+        'price': price,
     }
     return JsonResponse(result)
+
+def get_item(request, name):
+    current_item = ItemModel.objects.get(name=name)
+    category_slug = current_item.category.slug
+    item_info = {}
+    for key, value in current_item.__dict__.items():
+        if '_' not in key:
+            item_info[key] = value
+    print('info', item_info)
+    context = {
+        'item': item_info,
+        'link': f'/items/{category_slug}/{item_info.get("slug")}'
+    }
+    return JsonResponse(context)
+
+def category_page(request, category):
+    categories = CategoryModel.objects.all()
+    current_category = CategoryModel.objects.get(slug=category)
+    under_categories = UnderCategoryModel.objects.filter(cat=current_category.id)
+    items = ItemModel.objects.filter(category=current_category.id)
+    context = {
+        'items': items,
+        'current_category': current_category,
+        'categories': categories,
+        'undercats': under_categories
+    }
+    return render(request, 'main/category.html', context=context)

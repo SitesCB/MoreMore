@@ -42,8 +42,9 @@ class ItemModel(models.Model):
     bought = models.IntegerField(verbose_name="Количество покупок", default=0, blank=True) # для блока "Хиты"
     date = models.DateField(verbose_name="Дата создания") # для блока "Новинки"
 
+
     def get_absolute_url(self):
-        return f'items/{self.category.slug}/{self.slug}'
+        return f'/items/{self.category.slug}/{self.slug}'
 
     def get_all_weights(self):
         self.weight = WeightItem.objects.filter(for_item=self)

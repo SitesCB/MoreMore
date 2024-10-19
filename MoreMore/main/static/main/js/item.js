@@ -145,10 +145,12 @@ function loadCartContainer() {
 
         items = JSON.parse(localStorage.getItem('items'))
         items.forEach(item => {
+
             document.querySelector('.cart-container').innerHTML += `<div class="cart-item" id="item${item.id}" value="${item.weight}">
                                             <div class="img-cart-container">
-                                                <div class="img-cart">
-                                                </div>
+                                                <a class="img-cart" href="">
+                                                    <img src="">
+                                                </a>
                                             </div>
                                             <div class="item-info-cart">
                                                 <h2>${item.name}</h2>
@@ -167,6 +169,23 @@ function loadCartContainer() {
                                                 </div>
                                             </div>
                                         </div>`
+            fetch(`/api/items/${item.name}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok " + response.statusText);
+                }
+                return response.json()
+            })
+            .then(data => {
+                console.log("Response:", data);
+                image = data.item.image;
+                console.log('/media/' + image)
+                document.querySelector(`.cart-container #item${item.id} img`).setAttribute('src', '/media/' + image);
+                document.querySelector(`.cart-container #item${item.id} .img-cart`).setAttribute('href', data.link);
+            })
+            .catch(error => {
+                console.error("There was a problem with the fetch operation:", error);
+            });
         });
         document.querySelector('.cart-container').innerHTML += `<hr>
                                         <div class="cart-price">
@@ -185,7 +204,7 @@ function loadCartContainer() {
         CollectSumCart();
     }
     catch {
-
+        console.log('error')
     }
 }
 
@@ -300,28 +319,28 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 })
 
-document.addEventListener('DOMContentLoaded', function() {
-    let item_name = document.title;
-    let options = document.querySelector('select');
-    options.addEventListener('change', function() {
-        fetch("/api/items/ikra-chernaya/" + options.value)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok " + response.statusText);
-            }
-            return response.json()
-        })
-        .then(data => {
-            console.log("Response:", data);
-            document.querySelector('#price-detail').textContent = data.price;
-
-        })
-        .catch(error => {
-            console.error("There was a problem with the fetch operation:", error);
-        });
-    })
-    
-})
+//document.addEventListener('DOMContentLoaded', function() {
+//    let item_name = document.title;
+//    let options = document.querySelector('select');
+//    options.addEventListener('change', function() {
+//        fetch("/api/items/ikra-chernaya/" + options.value)
+//        .then(response => {
+//            if (!response.ok) {
+//                throw new Error("Network response was not ok " + response.statusText);
+//            }
+//            return response.json()
+//        })
+//        .then(data => {
+//            console.log("Response:", data);
+//            document.querySelector('#price-detail').textContent = data.price;
+//
+//        })
+//        .catch(error => {
+//            console.error("There was a problem with the fetch operation:", error);
+//        });
+//    })
+//
+//})
 
 // fetch("/api/items/ikra-chernaya/500гр")
 //     .then(response => {

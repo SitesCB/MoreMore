@@ -67,7 +67,7 @@
         <div class="body-menu">
             <ul>
                 {% for category in categories %}
-                    <a href="{{ category.slug }}"><li>{{ category.name }}</li></a>
+                    <a href="{% url 'index' %}items/{{ category.slug }}"><li>{{ category.name }}</li></a>
                 {% endfor %}
             </ul>
         </div>
