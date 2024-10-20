@@ -12,6 +12,7 @@ urlpatterns = [
     path('privacy', privacy, name='privacy'),
     path('items/<str:category>/<slug:name>', detail_page),
     path('items/<slug:category>', category_page),
+    path('search/', search_page, name='search'),
     path('api/items/<slug:name>/<str:size>', get_price_weight),
-    path('api/items/<str:name>', get_item)
+    path('api/items/<str:name>', get_item),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

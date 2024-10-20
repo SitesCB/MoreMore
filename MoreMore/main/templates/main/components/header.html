@@ -80,8 +80,12 @@
                     <button onclick="show_menu()"><img src="{% static 'main/images/icons/burger.png' %}"></button>
                     <p>Меню</p>
                 </div>
-                <form class="search-form" action="search.html" method="get">
-                    <input placeholder="Поиск..." value="" name="search">
+                <form class="search-form" action="{% url 'search' %}" method="get">
+                    {% if query == "" %}
+                        <input placeholder="Поиск..." value="" name="search">
+                    {% else %}
+                        <input placeholder="Поиск..." value="{{ query }}" name="search">
+                    {% endif %}
                     <button><img src="{% static 'main/images/icons/Sprite-0001.png' %}"></button>
                 </form>
             </div>

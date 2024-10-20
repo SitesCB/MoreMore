@@ -3,7 +3,7 @@
 {% block title %}Главная{% endblock title %}
 {% block content %}
 
-{% include "main/components/header.html" %}
+{% include "main/components/header.html" with query="" %}
 <main>
     <section class="home-section" id="home-section">
         <div class="site-container">
@@ -40,97 +40,9 @@
                     <div class="stick"></div>
                 </div>
                 <div class="container-6">
-                    <a class="item-6">
-                        <div class="img-item-6">
-
-                        </div>
-                        <p>От 250 ₽</p>
-                        <button>В корзину</button>
-                    </a>
-                    <a class="item-6">
-                        <div class="img-item-6">
-
-                        </div>
-                        <p>От 250 ₽</p>
-                        <button>В корзину</button>
-                    </a>
-                    <a class="item-6">
-                        <div class="img-item-6">
-
-                        </div>
-                        <p>От 250 ₽</p>
-                        <button>В корзину</button>
-                    </a>
-                    <a class="item-6">
-                        <div class="img-item-6">
-
-                        </div>
-                        <p>От 250 ₽</p>
-                        <button>В корзину</button>
-                    </a>
-                    <a class="item-6">
-                        <div class="img-item-6">
-
-                        </div>
-                        <p>От 250 ₽</p>
-                        <button>В корзину</button>
-                    </a>
-                    <a class="item-6">
-                        <div class="img-item-6">
-
-                        </div>
-                        <p>От 250 ₽</p>
-                        <button>В корзину</button>
-                    </a>
-                    <a class="item-6">
-                        <div class="img-item-6">
-
-                        </div>
-                        <p>От 250 ₽</p>
-                        <button>В корзину</button>
-                    </a>
-                    <a class="item-6">
-                        <div class="img-item-6">
-
-                        </div>
-                        <p>От 250 ₽</p>
-                        <button>В корзину</button>
-                    </a>
-                    <a class="item-6">
-                        <div class="img-item-6">
-
-                        </div>
-                        <p>От 250 ₽</p>
-                        <button>В корзину</button>
-                    </a>
-                    <a class="item-6">
-                        <div class="img-item-6">
-
-                        </div>
-                        <p>От 250 ₽</p>
-                        <button>В корзину</button>
-                    </a>
-                    <a class="item-6">
-                        <div class="img-item-6">
-
-                        </div>
-                        <p>От 250 ₽</p>
-                        <button>В корзину</button>
-                    </a>
-                    <a class="item-6">
-                        <div class="img-item-6">
-
-                        </div>
-                        <p>От 250 ₽</p>
-                        <button>В корзину</button>
-                    </a>
-                    <a class="item-6">
-                        <div class="img-item-6">
-
-                        </div>
-                        <p>От 250 ₽</p>
-                        <button>В корзину</button>
-                    </a>
+                    {% for item in popular_items %}
+                        {% include 'main/components/card-6.html' with item=item %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -400,6 +312,9 @@
                     <div class="stick"></div>
                 </div>
                 <div class="container-4">
+                    {% for item in items_act %}
+                        {% include 'main/components/card-4.html' with item=item %}
+                    {% endfor %}
                     <div class="item-4" id="iitem3">
                         <a class="img-item-4" href="item.html">
                             <p>Рабочая карточка</p>

@@ -58,6 +58,10 @@ class ItemModel(models.Model):
                 self.current_weight = weight
         return self.current_weight
 
+    def calc_hot_price(self):
+
+        return int(self.get_minimal_weight().price * (1 - self.percent_action / 100))
+
     def __str__(self):
         return self.name
 

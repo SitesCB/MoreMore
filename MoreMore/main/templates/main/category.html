@@ -3,7 +3,7 @@
 {% block title %}{{ current_category.name }}{% endblock title %}
 {% block content %}
 
-{% include "main/components/header.html" %}
+{% include "main/components/header.html" with query="" %}
 <main>
     <section class="section-name-category" id="home-section">
         <img src="/media/{{ current_category.image }}">

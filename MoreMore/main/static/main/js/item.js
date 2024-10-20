@@ -144,9 +144,9 @@ function loadCartContainer() {
     try {
 
         items = JSON.parse(localStorage.getItem('items'))
+        let index = 0;
         items.forEach(item => {
-
-            document.querySelector('.cart-container').innerHTML += `<div class="cart-item" id="item${item.id}" value="${item.weight}">
+            let HTMLItem = `<div class="cart-item" id="item${item.id}" value="${item.weight}">
                                             <div class="img-cart-container">
                                                 <a class="img-cart" href="">
                                                     <img src="">
@@ -169,6 +169,10 @@ function loadCartContainer() {
                                                 </div>
                                             </div>
                                         </div>`
+
+            // adding to HTML
+            document.querySelector('.cart-container').innerHTML += HTMLItem
+
             fetch(`/api/items/${item.name}`)
             .then(response => {
                 if (!response.ok) {
@@ -180,12 +184,18 @@ function loadCartContainer() {
                 console.log("Response:", data);
                 image = data.item.image;
                 console.log('/media/' + image)
-                document.querySelector(`.cart-container #item${item.id} img`).setAttribute('src', '/media/' + image);
-                document.querySelector(`.cart-container #item${item.id} .img-cart`).setAttribute('href', data.link);
+                let collect_items = document.querySelectorAll('.cart-item');
+                console.log('все', collect_items);
+                let current_item = collect_items[index]
+                console.log('выбран', current_item);
+                current_item.querySelector(`img`).setAttribute('src', '/media/' + image);
+                current_item.querySelector(`.img-cart`).setAttribute('href', data.link);
+                index++;
             })
             .catch(error => {
                 console.error("There was a problem with the fetch operation:", error);
             });
+
         });
         document.querySelector('.cart-container').innerHTML += `<hr>
                                         <div class="cart-price">
@@ -319,28 +329,28 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 })
 
-//document.addEventListener('DOMContentLoaded', function() {
-//    let item_name = document.title;
-//    let options = document.querySelector('select');
-//    options.addEventListener('change', function() {
-//        fetch("/api/items/ikra-chernaya/" + options.value)
-//        .then(response => {
-//            if (!response.ok) {
-//                throw new Error("Network response was not ok " + response.statusText);
-//            }
-//            return response.json()
-//        })
-//        .then(data => {
-//            console.log("Response:", data);
-//            document.querySelector('#price-detail').textContent = data.price;
-//
-//        })
-//        .catch(error => {
-//            console.error("There was a problem with the fetch operation:", error);
-//        });
-//    })
-//
-//})
+document.addEventListener('DOMContentLoaded', function() {
+    let item_name = document.title;
+    let options = document.querySelector('select');
+    options.addEventListener('change', function() {
+        fetch("/api/items/ikra-chernaya/" + options.value)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok " + response.statusText);
+            }
+            return response.json()
+        })
+        .then(data => {
+            console.log("Response:", data);
+            document.querySelector('#price-detail').textContent = data.price;
+
+        })
+        .catch(error => {
+            console.error("There was a problem with the fetch operation:", error);
+        });
+    })
+
+})
 
 // fetch("/api/items/ikra-chernaya/500гр")
 //     .then(response => {

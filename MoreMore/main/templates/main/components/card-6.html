@@ -1,0 +1,5 @@
+<div class="item-6">
+    <a href="{{ item.get_absolute_url }}"><img class="img-item-6" src="/media/{{ item.image }}"></a>
+    <p>От <span class="price-item-numeric">{{ item.get_minimal_weight.price }}</span> ₽</p>
+    <button onclick="AddToCartFromPage({{ item.id }})">В корзину</button>
+</div>

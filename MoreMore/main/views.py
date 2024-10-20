@@ -5,10 +5,14 @@ from .models import *
 def index(request):
 
     categories = CategoryModel.objects.all()
-    items = ItemModel.objects.all()
+    items = ItemModel.objects.filter(is_action=False)
+    items_action = ItemModel.objects.filter(is_action=True)
+    popular_items = ItemModel.objects.all().order_by('bought')
     context = {
         'categories': categories,
-        'items': items[:8]
+        'items': items[:8],
+        'items_act': items_action[:8],
+        'popular_items': popular_items[:12]
     }
     return render(request, 'main/index.html', context=context)
 
@@ -75,7 +79,6 @@ def get_item(request, name):
     for key, value in current_item.__dict__.items():
         if '_' not in key:
             item_info[key] = value
-    print('info', item_info)
     context = {
         'item': item_info,
         'link': f'/items/{category_slug}/{item_info.get("slug")}'
@@ -94,3 +97,23 @@ def category_page(request, category):
         'undercats': under_categories
     }
     return render(request, 'main/category.html', context=context)
+
+def search_page(request):
+    data = request.GET
+    query = data['search']
+
+    items = ItemModel.objects.all()
+    result_items = []
+
+    for item in items:
+        for part in query.split():
+            if part.lower() in item.name.lower():
+                result_items.append(item)
+                break
+
+    context = {
+        'query': query,
+        'items': result_items
+    }
+
+    return render(request, 'main/search.html', context=context)

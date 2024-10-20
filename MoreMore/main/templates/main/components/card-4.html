@@ -4,7 +4,7 @@
     </a>
     <div class="item-4-neck">
         <div class="info">
-            <p>{{ item.name }}</p>
+            <p>{{ item.name|truncatechars:11 }}</p>
             <p>Упаковка: {{ item.get_minimal_weight.size }}</p>
         </div>
         <div class="counter">
@@ -14,7 +14,14 @@
         </div>
     </div>
     <div class="item-4-shoes">
-        <p class="price-detail">От <span class="price-item-numeric">{{ item.get_minimal_weight.price }}</span> ₽</p>
+        {% if item.is_action %}
+            <div class="item-4-prices">
+                <p class="price-detail">От {{ item.get_minimal_weight.price }} ₽</p>
+                <p class="price-detail">От <span class="price-item-numeric">{{ item.calc_hot_price }}</span> ₽</p>
+            </div>
+        {% else %}
+            <p class="price-detail">От <span class="price-item-numeric">{{ item.get_minimal_weight.price }}</span> ₽</p>
+        {% endif %}
         <button onclick="AddToCartFromPage({{ item.id }})">В корзину</button>
     </div>
 </div>
