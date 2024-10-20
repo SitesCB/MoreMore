@@ -329,39 +329,30 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 })
 
-document.addEventListener('DOMContentLoaded', function() {
-    let item_name = document.title;
-    let options = document.querySelector('select');
-    options.addEventListener('change', function() {
-        fetch("/api/items/ikra-chernaya/" + options.value)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok " + response.statusText);
-            }
-            return response.json()
-        })
-        .then(data => {
-            console.log("Response:", data);
-            document.querySelector('#price-detail').textContent = data.price;
+try {
+    document.addEventListener('DOMContentLoaded', function() {
+        let item_name = document.title;
+        let options = document.querySelector('select');
+        options.addEventListener('change', function() {
+            fetch("/api/items/ikra-chernaya/" + options.value)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok " + response.statusText);
+                }
+                return response.json()
+            })
+            .then(data => {
+                console.log("Response:", data);
+                document.querySelector('#price-detail').textContent = data.price;
 
+            })
+            .catch(error => {
+                console.error("There was a problem with the fetch operation:", error);
+            });
         })
-        .catch(error => {
-            console.error("There was a problem with the fetch operation:", error);
-        });
+
     })
+}
+catch {
 
-})
-
-// fetch("/api/items/ikra-chernaya/500гр")
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error("Network response was not ok " + response.statusText);
-//         }
-//         return response.json();
-//     })
-//     .then(data => {
-//         console.log("Response:", data);
-//     })
-//     .catch(error => {
-//         console.error("There was a problem with the fetch operation:", error);
-//     });
+}

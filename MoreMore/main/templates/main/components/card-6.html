@@ -1,5 +1,13 @@
 <div class="item-6">
     <a href="{{ item.get_absolute_url }}"><img class="img-item-6" src="/media/{{ item.image }}"></a>
-    <p>От <span class="price-item-numeric">{{ item.get_minimal_weight.price }}</span> ₽</p>
+
+    {% if item.is_action %}
+        <div class="item-6-prices">
+            <p class="price-detail">От {{ item.get_minimal_weight.price }} ₽</p>
+            <p class="price-detail">От <span class="price-item-numeric">{{ item.calc_hot_price }}</span> ₽</p>
+        </div>
+    {% else %}
+        <p class="price-detail">От <span class="price-item-numeric">{{ item.get_minimal_weight.price }}</span> ₽</p>
+    {% endif %}
     <button onclick="AddToCartFromPage({{ item.id }})">В корзину</button>
 </div>
