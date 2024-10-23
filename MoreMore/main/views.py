@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from .models import *
+import json
 
 def index(request):
 
@@ -52,12 +53,11 @@ def privacy(request):
     return render(request, 'main/privacy.html', context=context)
 
 def detail_page(request, category, name):
-    item = ItemModel.objects.filter(slug=name)[0]
+    items = ItemModel.objects.filter(slug=name)[0]
     categories = CategoryModel.objects.all()
-    weights = item.get_all_weights()
+
     context = {
-        'item': item,
-        'weights': weights,
+        'item': items,
         'categories': categories
     }
     return render(request, 'main/item.html', context=context)
@@ -117,3 +117,53 @@ def search_page(request):
     }
 
     return render(request, 'main/search.html', context=context)
+
+def new_contact(request, *args):
+    name = request.POST.get('name')
+    phone = request.POST.get('phone')
+    message = request.POST.get('message')
+
+    try:
+        contact = ContactsModel(
+            name=name,
+            phone=phone,
+            message=message
+        )
+
+        contact.save()
+
+    except Exception as ex:
+        return JsonResponse({'status': 404})
+
+    return redirect('/?send=true')
+
+def payment(request):
+    data = request.POST
+    type_payment = data.get('payment-type')
+
+    if type_payment == 'before-payment':
+        url = '../?payment=true&'
+        for key, value in data.items():
+            print(key, value)
+            url += f'{key}={value}&'
+
+        return redirect(url)
+    return HttpResponse('payment')
+
+def newcart(request, cart):
+    print('cart', cart)
+    print('ПОСТ', request.GET)
+    data = request.GET
+
+    new_item = CartPayModel(
+        name=data.get('name'),
+        phone=data.get('phone'),
+        city=data.get('city'),
+        address=data.get('location'),
+        payment_type="После получения",
+        cart=cart
+    )
+
+    new_item.save()
+
+    return HttpResponse(f'{json.loads(cart)}')

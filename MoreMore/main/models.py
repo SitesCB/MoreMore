@@ -59,8 +59,17 @@ class ItemModel(models.Model):
         return self.current_weight
 
     def calc_hot_price(self):
-
         return int(self.get_minimal_weight().price * (1 - self.percent_action / 100))
+
+    def get_recomendations(self):
+        self.items = ItemModel.objects.all()
+        self.result_recomend = []
+        for item in self.items:
+            if item.category == self.category and item.name != self.name:
+                self.result_recomend.append(item)
+
+        return self.result_recomend[:12]
+
 
     def __str__(self):
         return self.name

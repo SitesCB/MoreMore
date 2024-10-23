@@ -91,6 +91,8 @@ function AddToCart(item_id) {
         document.getElementById('cart-counter').textContent = localStorage.getItem('count_cart');
     }
 
+
+    document.getElementById('name-popup').textContent = result.name;
     document.getElementById('counter-popup').textContent = 'Количество: ' + result.count;
     document.getElementById('summary-popup').textContent = 'Сумма: ' + result.price_result + "₽";
     
@@ -278,4 +280,84 @@ function clearCartPage() {
 
 
 document.addEventListener("DOMContentLoaded", clearCartPage())
+document.addEventListener("DOMContentLoaded", function() {
+//    class="open-page"
+    let title = document.title;
+    switch (title) {
+        case "Главная":
+            document.querySelector('footer .urls a:nth-child(1)').classList.add("open-page");
+            break;
+        case "Доставка и оплата":
+            document.querySelector('footer .urls a:nth-child(2)').classList.add("open-page");
+            break;
+        case "О нас":
+            document.querySelector('footer .urls a:nth-child(3)').classList.add("open-page");
+            break;
+        case "Контакты":
+            document.querySelector('footer .urls a:nth-child(4)').classList.add("open-page");
+            break;
+    }
+});
+
+const currentUrl = window.location.href;
+
+const url = new URL(currentUrl);
+const send = url.searchParams.get('send');
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (Boolean(send) == true) {
+        alert('Ваша заявка была успешно отправлена')
+    }
+});
+
+function CollectCartToBack(data) {
+    
+    let cart = localStorage.getItem('items');
+    let params = Object.keys(data)
+    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&');
+    
+
+    let url = "/api/cart/addnew/" + cart + "?" + params;
+    console.log(url)
+    
+    fetch(url)
+    .then(response => {
+        return response.text();
+    })
+    .then(text => {
+        return JSON.parse(text.replace(/'/g, '"'));
+    })
+    .then(data => {
+        console.log('data', data);
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+    });
+    
+}
+
+if (document.title == 'Корзина') {
+    const currentUrl = window.location.href;
+
+    const url = new URL(currentUrl);
+    const payment = url.searchParams.get('payment');
+
+    let data = {
+        phone: url.searchParams.get('phone'),
+        name: url.searchParams.get('name'),
+        city: url.searchParams.get('city'),
+        location: url.searchParams.get('location')
+    }
+
+    if (Boolean(payment) == true) {
+        // добавляем пометку о том, что оплата прошла и редирект на главную страницу
+        CollectCartToBack(data);
+        alert("Ваша заявка была оставлена");
+        localStorage.setItem('count_cart', 0);
+        localStorage.setItem('items', '[]');
+        window.location.href = "/";
+    }
+
+}
 

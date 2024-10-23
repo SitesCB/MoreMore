@@ -15,14 +15,18 @@
                         </div>
                         <div class="right-block">
                             <h1>{{ item.name }}</h1>
-                            <h4><span id="price-detail">{{ item.get_minimal_weight.price }}</span>₽</h4>
+                            {% if item.is_action %}
+                                <h4><span id="price-detail">{{ item.calc_hot_price }}</span>₽</h4>
+                            {% else %}
+                                <h4><span id="price-detail">{{ item.get_minimal_weight.price }}</span>₽</h4>
+                            {% endif %}
                             <div class="stick"></div>
                             <h2>Описание</h2>
                             <p>{{ item.description }}</p>
                             <h2 class="weight-header">Вес</h2>
                             <div class="buttons-details">
                                 <select id="types-details">
-                                    {% for weight in weights %}
+                                    {% for weight in item.get_all_weights %}
                                         <option>{{ weight.size }}</option>
                                     {% endfor %}
                                 </select>
@@ -50,246 +54,9 @@
         <div class="site-container to-center">
             <div class="content">
                 <div class="container-4">
-                    <div class="item-4">
-                        <div class="img-item-4">
-
-                        </div>
-                        <div class="item-4-neck">
-                            <div class="info">
-                                <p>Название</p>
-                                <p>Описание</p>
-                            </div>
-                            <div class="counter">
-                                <button onclick="decrement('item1')">-</button>
-                                <input value="1" type="number" id="item1"></input>
-                                <button onclick="increment('item1')">+</button>
-                            </div>
-                        </div>
-                        <div class="item-4-shoes">
-                            <p>От 500 ₽</p>
-                            <button>В корзину</button>
-                        </div>
-                    </div>
-                    <div class="item-4">
-                        <div class="img-item-4">
-
-                        </div>
-                        <div class="item-4-neck">
-                            <div class="info">
-                                <p>Название</p>
-                                <p>Описание</p>
-                            </div>
-                            <div class="counter">
-                                <button>-</button>
-                                <input value="1" type="number"></input>
-                                <button>+</button>
-                            </div>
-                        </div>
-                        <div class="item-4-shoes">
-                            <p>От 500 ₽</p>
-                            <button>В корзину</button>
-                        </div>
-                    </div>
-                    <div class="item-4">
-                        <div class="img-item-4">
-
-                        </div>
-                        <div class="item-4-neck">
-                            <div class="info">
-                                <p>Название</p>
-                                <p>Описание</p>
-                            </div>
-                            <div class="counter">
-                                <button>-</button>
-                                <input value="1" type="number"></input>
-                                <button>+</button>
-                            </div>
-                        </div>
-                        <div class="item-4-shoes">
-                            <p>От 500 ₽</p>
-                            <button>В корзину</button>
-                        </div>
-                    </div>
-                    <div class="item-4">
-                        <div class="img-item-4">
-
-                        </div>
-                        <div class="item-4-neck">
-                            <div class="info">
-                                <p>Название</p>
-                                <p>Описание</p>
-                            </div>
-                            <div class="counter">
-                                <button>-</button>
-                                <input value="1" type="number"></input>
-                                <button>+</button>
-                            </div>
-                        </div>
-                        <div class="item-4-shoes">
-                            <p>От 500 ₽</p>
-                            <button>В корзину</button>
-                        </div>
-                    </div>
-                    <div class="item-4">
-                        <div class="img-item-4">
-
-                        </div>
-                        <div class="item-4-neck">
-                            <div class="info">
-                                <p>Название</p>
-                                <p>Описание</p>
-                            </div>
-                            <div class="counter">
-                                <button>-</button>
-                                <input value="1" type="number"></input>
-                                <button>+</button>
-                            </div>
-                        </div>
-                        <div class="item-4-shoes">
-                            <p>От 500 ₽</p>
-                            <button>В корзину</button>
-                        </div>
-                    </div>
-                    <div class="item-4">
-                        <div class="img-item-4">
-
-                        </div>
-                        <div class="item-4-neck">
-                            <div class="info">
-                                <p>Название</p>
-                                <p>Описание</p>
-                            </div>
-                            <div class="counter">
-                                <button>-</button>
-                                <input value="1" type="number"></input>
-                                <button>+</button>
-                            </div>
-                        </div>
-                        <div class="item-4-shoes">
-                            <p>От 500 ₽</p>
-                            <button>В корзину</button>
-                        </div>
-                    </div>
-                    <div class="item-4">
-                        <div class="img-item-4">
-
-                        </div>
-                        <div class="item-4-neck">
-                            <div class="info">
-                                <p>Название</p>
-                                <p>Описание</p>
-                            </div>
-                            <div class="counter">
-                                <button>-</button>
-                                <input value="1" type="number"></input>
-                                <button>+</button>
-                            </div>
-                        </div>
-                        <div class="item-4-shoes">
-                            <p>От 500 ₽</p>
-                            <button>В корзину</button>
-                        </div>
-                    </div>
-                    <div class="item-4">
-                        <div class="img-item-4">
-
-                        </div>
-                        <div class="item-4-neck">
-                            <div class="info">
-                                <p>Название</p>
-                                <p>Описание</p>
-                            </div>
-                            <div class="counter">
-                                <button>-</button>
-                                <input value="1" type="number"></input>
-                                <button>+</button>
-                            </div>
-                        </div>
-                        <div class="item-4-shoes">
-                            <p>От 500 ₽</p>
-                            <button>В корзину</button>
-                        </div>
-                    </div>
-                    <div class="item-4">
-                        <div class="img-item-4">
-
-                        </div>
-                        <div class="item-4-neck">
-                            <div class="info">
-                                <p>Название</p>
-                                <p>Описание</p>
-                            </div>
-                            <div class="counter">
-                                <button>-</button>
-                                <input value="1" type="number"></input>
-                                <button>+</button>
-                            </div>
-                        </div>
-                        <div class="item-4-shoes">
-                            <p>От 500 ₽</p>
-                            <button>В корзину</button>
-                        </div>
-                    </div>
-                    <div class="item-4">
-                        <div class="img-item-4">
-
-                        </div>
-                        <div class="item-4-neck">
-                            <div class="info">
-                                <p>Название</p>
-                                <p>Описание</p>
-                            </div>
-                            <div class="counter">
-                                <button>-</button>
-                                <input value="1" type="number"></input>
-                                <button>+</button>
-                            </div>
-                        </div>
-                        <div class="item-4-shoes">
-                            <p>От 500 ₽</p>
-                            <button>В корзину</button>
-                        </div>
-                    </div>
-                    <div class="item-4">
-                        <div class="img-item-4">
-
-                        </div>
-                        <div class="item-4-neck">
-                            <div class="info">
-                                <p>Название</p>
-                                <p>Описание</p>
-                            </div>
-                            <div class="counter">
-                                <button>-</button>
-                                <input value="1" type="number"></input>
-                                <button>+</button>
-                            </div>
-                        </div>
-                        <div class="item-4-shoes">
-                            <p>От 500 ₽</p>
-                            <button>В корзину</button>
-                        </div>
-                    </div>
-                    <div class="item-4">
-                        <div class="img-item-4">
-
-                        </div>
-                        <div class="item-4-neck">
-                            <div class="info">
-                                <p>Название</p>
-                                <p>Описание</p>
-                            </div>
-                            <div class="counter">
-                                <button>-</button>
-                                <input value="1" type="number"></input>
-                                <button>+</button>
-                            </div>
-                        </div>
-                        <div class="item-4-shoes">
-                            <p>От 500 ₽</p>
-                            <button>В корзину</button>
-                        </div>
-                    </div>
+                    {% for item in item.get_recomendations %}
+                        {% include 'main/components/card-4.html' with item=item %}
+                    {% endfor %}
                 </div>
             </div>
         </div>

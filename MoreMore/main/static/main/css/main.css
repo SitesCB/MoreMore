@@ -476,7 +476,7 @@ h1 {
 .img-item-6 {
     height : 150px;
     width: 150px;
-    background-color: #d9d9d9;
+    background-color: white;
     margin-bottom: -20px;
     border-radius: 10px;
 }
@@ -1508,7 +1508,7 @@ footer .wave {
     align-items: center;
     width : 400px;
     height: 400px;
-    background-color: #d9d9d9;
+    background-color: white;
 }
 
 .buttons-details {

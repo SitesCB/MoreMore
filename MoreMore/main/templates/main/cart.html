@@ -21,10 +21,11 @@
                     </div>
                     <div class="right-cart">
                         <form class="cart-form" method="post" action="payment/">
+                            {% csrf_token %}
                             <h1>Контактные данные</h1>
                             <div class="user-contact-input">
-                                <input type="text" required name="phone" placeholder="Номер телефона">
-                                <input type="text" required name="name" placeholder="Ваше имя">
+                                <input type="text" required name="phone" placeholder="Номер телефона" class="cart-input">
+                                <input type="text" required name="name" placeholder="Ваше имя" class="cart-input">
                             </div>
                             <h1>Адрес доставки</h1>
                             <fieldset>
@@ -37,19 +38,19 @@
                                     <label for="kstovo-city">Кстово</label>
                                 </div>
                             </fieldset>
-                            <input type="text" required name="location" placeholder="Улица, дом, кв.">
+                            <input type="text" required name="location" placeholder="Улица, дом, кв." class="cart-input">
                             <h1>Способ оплаты</h1>
                             <fieldset>
                                 <div class="cart-radio">
-                                    <input type="radio" id="before-payment" name="payment-type" value="before-payment" checked>
-                                    <label for="before-payment">Оплата на сайте</label>
+                                    <input type="radio" id="after-payment" name="payment-type" value="after-payment" checked>
+                                    <label for="after-payment">Оплата на сайте</label>
                                 </div>
                                 <div class="cart-radio">
-                                    <input type="radio" id="after-payment" name="payment-type" value="after-payment">
-                                    <label for="after-payment">После получения</label>
+                                    <input type="radio" id="before-payment" name="payment-type" value="before-payment">
+                                    <label for="before-payment">После получения</label>
                                 </div>
                             </fieldset>
-                            <button type="submit">Перейти к оформлению</button>
+                            <button type="submit" onclick="CollectCartToBack()">Перейти к оформлению</button>
                         </form>
                     </div>
                 </div>
@@ -58,5 +59,4 @@
     </section>
 </main>
 {% include "main/components/footer.html" %}
-
 {% endblock content %}
