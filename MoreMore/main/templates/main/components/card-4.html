@@ -4,6 +4,7 @@
     </a>
     <div class="item-4-neck">
         <div class="info">
+            <p>{{ item.name }}</p>
             <p>{{ item.name|truncatechars:11 }}</p>
             <p>Упаковка: {{ item.get_minimal_weight.size }}</p>
         </div>

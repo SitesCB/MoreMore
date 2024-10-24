@@ -39,6 +39,7 @@ def contacts(request):
     return render(request, 'main/contacts.html', context=context)
 
 def cart(request):
+    print(request.GET)
     categories = CategoryModel.objects.all()
     context = {
         'categories': categories
@@ -148,7 +149,15 @@ def payment(request):
             url += f'{key}={value}&'
 
         return redirect(url)
-    return HttpResponse('payment')
+
+    print(data)
+    context = {
+        'name': data['name'],
+        'phone': data['phone'],
+        'city': data['city'],
+        'location': data['location'],
+    }
+    return render(request, 'main/payment.html', context=context)
 
 def newcart(request, cart):
     print('cart', cart)

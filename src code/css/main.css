@@ -332,11 +332,11 @@ h1 {
 }
 
 .ad-block:nth-child(1) {
-    background-image: url(/static/main/images/mockups/1.png);
+    background-image: url(../mockups/1.png);
 }
 
 .ad-block:nth-child(2) {
-    background-image: url(/static/main/images/mockups/2.png);
+    background-image: url(../mockups/2.png);
 }
 
 .ad-block:hover {
@@ -345,7 +345,7 @@ h1 {
 }
 
 #vertical-block {
-    background-image: url(/static/main/images/mockups/3.png);
+    background-image: url(../mockups/3.png);
 }
 
 .ad-block img {
@@ -476,28 +476,15 @@ h1 {
 .img-item-6 {
     height : 150px;
     width: 150px;
-    background-color: white;
+    background-color: #d9d9d9;
     margin-bottom: -20px;
     border-radius: 10px;
 }
 
 .item-6 p {
-    font-family: "Montserrat";
     font-size: 20px;
-}
-
-.item-6-prices p:nth-child(2) {
+    margin-bottom: 5px;
     font-family: "Montserrat";
-    font-size: 16px;
-    color : #d55454;
-    margin-top: -10px;
-}
-
-.item-6-prices p:nth-child(1) {
-    margin-top: 20px;
-    font-family: "Montserrat";
-    font-size: 12px;
-    text-decoration-line: line-through;
 }
 
 .item-6 button {
@@ -543,16 +530,8 @@ h1 {
     color: black;
     height : 250px;
     width: 100%;
+    background-color: #d9d9d9;
     border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.img-item-4-img {
-    width: 80%;
-    height: auto;
-    border-radius: 10px
 }
 
 .img-item-4:hover {
@@ -582,15 +561,11 @@ h1 {
 }
 
 .item-4-neck .info p:nth-child(1) {
-    display: none;
-}
-
-.item-4-neck .info p:nth-child(2) {
     font-size: 20px;
 }
 
-.item-4-neck .info p:nth-child(3) {
-    margin-top : 0px;
+.item-4-neck .info p:nth-child(2) {
+    margin-top : -10px;
     font-size: 14px;
 }
 
@@ -1512,7 +1487,7 @@ footer .wave {
     align-items: center;
     width : 400px;
     height: 400px;
-    background-color: white;
+    background-color: #d9d9d9;
 }
 
 .buttons-details {
@@ -1749,18 +1724,10 @@ footer .wave {
     height: 128px;
 }
 
-.img-cart img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-
 .img-cart {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100px;
     height: 100px;
+    background-color: #d9d9d9;
     border-radius: 10px;
 }
 
@@ -2003,14 +1970,4 @@ fieldset {
     padding-top: 20px;
     font-size: 20px;
     border-radius: 30px;
-}
-
-.not-found {
-    margin-top: 75px;
-    margin-bottom: 75px
-}
-
-.not-found img {
-    width: 300px;
-    height: auto
 }

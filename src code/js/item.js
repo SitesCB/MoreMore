@@ -126,7 +126,7 @@ function getInformationCard(card_id) {
     let card_item = 'iitem' + card_id;
     let card = document.getElementById(card_item);
     let name_item = card.querySelector(".info p").textContent;
-    let weight = card.querySelector(".info p:nth-child(3)").textContent;
+    let weight = card.querySelector(".info p:nth-child(2)").textContent;
     let count = card.querySelector("input").value;
     let price = card.querySelector('.price-item-numeric').textContent;
     let result_price = Number(count * price);
@@ -144,19 +144,17 @@ function loadCartContainer() {
     try {
 
         items = JSON.parse(localStorage.getItem('items'))
-        let index = 0;
         items.forEach(item => {
-            let HTMLItem = `<div class="cart-item" id="item${item.id}" value="${item.weight}">
+            document.querySelector('.cart-container').innerHTML += `<div class="cart-item" id="item${item.id}" value="${item.weight}">
                                             <div class="img-cart-container">
-                                                <a class="img-cart" href="">
-                                                    <img src="">
-                                                </a>
+                                                <div class="img-cart">
+                                                </div>
                                             </div>
                                             <div class="item-info-cart">
                                                 <h2>${item.name}</h2>
                                                 <p>${item.weight}</p>
-                                                <button onclick="DeleteFromCart('item${item.id}-w${item.weight.replace("Упаковка: ", "").replace("гр", "").replace("кг", "")}')">
-                                                    <img src="/static/main/images/icons/Sprite-0021.png">
+                                                <button onclick="DeleteFromCart('item${item.id}-w${item.weight.replace("Упаковка: ", "").replace("г", "")}')">
+                                                    <img src="иконки/Sprite-0021.png">
                                                     <p>Удалить</p>
                                                 </button>
                                             </div>
@@ -169,33 +167,6 @@ function loadCartContainer() {
                                                 </div>
                                             </div>
                                         </div>`
-
-            // adding to HTML
-            document.querySelector('.cart-container').innerHTML += HTMLItem
-
-            fetch(`/api/items/${item.name}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok " + response.statusText);
-                }
-                return response.json()
-            })
-            .then(data => {
-                console.log("Response:", data);
-                image = data.item.image;
-                console.log('/media/' + image)
-                let collect_items = document.querySelectorAll('.cart-item');
-                console.log('все', collect_items);
-                let current_item = collect_items[index]
-                console.log('выбран', current_item);
-                current_item.querySelector(`img`).setAttribute('src', '/media/' + image);
-                current_item.querySelector(`.img-cart`).setAttribute('href', data.link);
-                index++;
-            })
-            .catch(error => {
-                console.error("There was a problem with the fetch operation:", error);
-            });
-
         });
         document.querySelector('.cart-container').innerHTML += `<hr>
                                         <div class="cart-price">
@@ -214,7 +185,7 @@ function loadCartContainer() {
         CollectSumCart();
     }
     catch {
-        console.log('error')
+
     }
 }
 
@@ -329,32 +300,3 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 })
 
-try {
-    document.addEventListener('DOMContentLoaded', function() {
-        let item_name = document.title;
-        let options = document.querySelector('select');
-        let slug = document.querySelector('.right-block h1').getAttribute('slug');
-        console.log(slug);
-        options.addEventListener('change', function() {
-            fetch("/api/items/" + slug + "/" + options.value)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok " + response.statusText);
-                }
-                return response.json()
-            })
-            .then(data => {
-                console.log("Response:", data);
-                document.querySelector('#price-detail').textContent = data.price;
-
-            })
-            .catch(error => {
-                console.error("There was a problem with the fetch operation:", error);
-            });
-        })
-
-    })
-}
-catch {
-
-}

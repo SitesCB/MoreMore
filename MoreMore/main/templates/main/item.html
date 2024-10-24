@@ -14,7 +14,7 @@
                             <div class="img-detail"><img class="img-detail" src="/media/{{ item.image }}"></div>
                         </div>
                         <div class="right-block">
-                            <h1>{{ item.name }}</h1>
+                            <h1 slug="{{ item.slug }}">{{ item.name }}</h1>
                             {% if item.is_action %}
                                 <h4><span id="price-detail">{{ item.calc_hot_price }}</span>₽</h4>
                             {% else %}
