@@ -1,9 +1,12 @@
+import os
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from .models import *
 import json
+import requests
 
-def index(request):
+def index(request) -> HttpResponse:
 
     categories = CategoryModel.objects.all()
     items = ItemModel.objects.filter(is_action=False)
@@ -17,43 +20,44 @@ def index(request):
     }
     return render(request, 'main/index.html', context=context)
 
-def about(request):
+def about(request) -> HttpResponse:
     categories = CategoryModel.objects.all()
     context = {
         'categories': categories
     }
     return render(request, 'main/about.html', context=context)
 
-def delivery(request):
+def delivery(request) -> HttpResponse:
     categories = CategoryModel.objects.all()
     context = {
         'categories': categories
     }
     return render(request, 'main/delivery.html', context=context)
 
-def contacts(request):
+def contacts(request) -> HttpResponse:
     categories = CategoryModel.objects.all()
     context = {
         'categories': categories
     }
     return render(request, 'main/contacts.html', context=context)
 
-def cart(request):
-    print(request.GET)
+def cart(request) -> HttpResponse:
+    data = request.GET
     categories = CategoryModel.objects.all()
     context = {
         'categories': categories
     }
+
     return render(request, 'main/cart.html', context=context)
 
-def privacy(request):
+def privacy(request) -> HttpResponse:
     categories = CategoryModel.objects.all()
     context = {
         'categories': categories
     }
     return render(request, 'main/privacy.html', context=context)
 
-def detail_page(request, category, name):
+def detail_page(request, category, name) -> HttpResponse:
     items = ItemModel.objects.filter(slug=name)[0]
     categories = CategoryModel.objects.all()
 
@@ -63,7 +67,7 @@ def detail_page(request, category, name):
     }
     return render(request, 'main/item.html', context=context)
 
-def get_price_weight(request, name, size):
+def get_price_weight(request, name, size) -> JsonResponse:
     ''' Получение цены за вес определенного товара '''
     item = ItemModel.objects.get(slug=name)
     price = WeightItem.objects.filter(for_item=item.id, size=size)[0].price
@@ -73,7 +77,7 @@ def get_price_weight(request, name, size):
     }
     return JsonResponse(result)
 
-def get_item(request, name):
+def get_item(request, name) -> JsonResponse:
     current_item = ItemModel.objects.get(name=name)
     category_slug = current_item.category.slug
     item_info = {}
@@ -86,7 +90,7 @@ def get_item(request, name):
     }
     return JsonResponse(context)
 
-def category_page(request, category):
+def category_page(request, category) -> HttpResponse:
     categories = CategoryModel.objects.all()
     current_category = CategoryModel.objects.get(slug=category)
     under_categories = UnderCategoryModel.objects.filter(cat=current_category.id)
@@ -99,7 +103,7 @@ def category_page(request, category):
     }
     return render(request, 'main/category.html', context=context)
 
-def search_page(request):
+def search_page(request) -> HttpResponse:
     data = request.GET
     query = data['search']
 
@@ -119,7 +123,7 @@ def search_page(request):
 
     return render(request, 'main/search.html', context=context)
 
-def new_contact(request, *args):
+def new_contact(request, *args) -> HttpResponse:
     name = request.POST.get('name')
     phone = request.POST.get('phone')
     message = request.POST.get('message')
@@ -138,7 +142,7 @@ def new_contact(request, *args):
 
     return redirect('/?send=true')
 
-def payment(request):
+def payment(request) -> HttpResponse:
     data = request.POST
     type_payment = data.get('payment-type')
 
@@ -159,9 +163,7 @@ def payment(request):
     }
     return render(request, 'main/payment.html', context=context)
 
-def newcart(request, cart):
-    print('cart', cart)
-    print('ПОСТ', request.GET)
+def newcart(request, cart) -> HttpResponse:
     data = request.GET
 
     new_item = CartPayModel(
@@ -172,6 +174,9 @@ def newcart(request, cart):
         payment_type="После получения",
         cart=cart
     )
+
+    if request.GET.get('payment') == 'true':
+        requests.post(f'https://api.telegram.org/bot{os.environ["BOT_TOKEN"]}/sendMessage?chat_id={os.environ["TG_ID"]}&text={json.loads(cart)}')
 
     new_item.save()
 
